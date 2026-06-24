@@ -43,7 +43,7 @@ export function BrandMark({ variant = "light" }: BrandMarkProps) {
             isDark ? "text-gold" : "text-graphite-soft"
           }`}
         >
-          SITE PROVISORIO
+          BERTIOGA/SP
         </span>
       </span>
     </Link>

@@ -89,7 +89,7 @@ export function SiteHeader() {
             href="/contato#formulario-contato"
             className="hidden min-h-11 items-center justify-center rounded-sm border border-gold bg-gold px-4 text-sm font-semibold text-navy transition hover:bg-white hover:text-navy focus-visible:bg-white focus-visible:text-navy md:flex lg:hidden"
           >
-            Pre-agendamento
+            Pré-agendamento
           </Link>
         </div>
         <div className="flex items-center gap-4 lg:gap-5">
@@ -114,7 +114,7 @@ export function SiteHeader() {
             href="/contato#formulario-contato"
             className="hidden min-h-12 shrink-0 items-center justify-center rounded-sm bg-gold px-5 text-sm font-semibold text-navy transition hover:bg-white focus-visible:bg-white lg:flex"
           >
-            Solicitar pre-agendamento
+            Solicitar pré-agendamento
           </Link>
         </div>
         <MobileNavigation isOpen={isMobileMenuOpen} onClose={closeMobileMenu} />

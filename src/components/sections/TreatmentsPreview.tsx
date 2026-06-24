@@ -12,8 +12,12 @@ export function TreatmentsPreview() {
               Tratamentos
             </p>
             <h2 className="mt-3 text-3xl font-semibold text-navy md:text-4xl">
-              Area pronta para tratamentos confirmados
+              Principais tratamentos
             </h2>
+            <p className="mt-4 text-base leading-7 text-graphite-soft">
+              Conheça áreas de atendimento informadas pela clínica. A indicação depende de
+              avaliação individual.
+            </p>
           </div>
           <Link href="/tratamentos" className="font-semibold text-navy underline-offset-4 hover:underline">
             Ver todos

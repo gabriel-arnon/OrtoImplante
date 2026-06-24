@@ -37,7 +37,7 @@ function makeInternalEmail(
     .filter(([, value]) => value)
     .map(([key, value]) => `${key}: ${textOnly(String(value))}`);
   const text = [
-    `ID da solicitacao: ${requestId}`,
+    `ID da solicitação: ${requestId}`,
     `Data e hora: ${submittedAt}`,
     `Nome: ${textOnly(input.fullName)}`,
     `Telefone/WhatsApp: ${textOnly(input.phone)}`,
@@ -46,13 +46,13 @@ function makeInternalEmail(
     `Interesse: ${textOnly(input.treatmentInterest)}`,
     "Mensagem:",
     textOnly(input.message),
-    `Ciencia da politica de privacidade: ${input.privacyAccepted ? "sim" : "nao"}`,
+    `Ciência da política de privacidade: ${input.privacyAccepted ? "sim" : "não"}`,
     `Pagina de origem: ${textOnly(input.sourcePage || "/")}`,
     utmLines.length ? `Campanha:\n${utmLines.join("\n")}` : "Campanha: nao informada"
   ].join("\n\n");
 
   const html = `<div>
-  <p><strong>ID da solicitacao:</strong> ${escapeHtml(requestId)}</p>
+  <p><strong>ID da solicitação:</strong> ${escapeHtml(requestId)}</p>
   <p><strong>Data e hora:</strong> ${escapeHtml(submittedAt)}</p>
   <p><strong>Nome:</strong> ${escapeHtml(input.fullName)}</p>
   <p><strong>Telefone/WhatsApp:</strong> ${escapeHtml(input.phone)}</p>
@@ -61,7 +61,7 @@ function makeInternalEmail(
   <p><strong>Interesse:</strong> ${escapeHtml(input.treatmentInterest)}</p>
   <p><strong>Mensagem:</strong></p>
   <p>${escapeHtml(input.message).replace(/\n/g, "<br />")}</p>
-  <p><strong>Ciencia da politica de privacidade:</strong> ${input.privacyAccepted ? "sim" : "nao"}</p>
+  <p><strong>Ciência da política de privacidade:</strong> ${input.privacyAccepted ? "sim" : "não"}</p>
   <p><strong>Pagina de origem:</strong> ${escapeHtml(input.sourcePage || "/")}</p>
   <p><strong>Campanha:</strong> ${utmLines.length ? escapeHtml(utmLines.join(" | ")) : "nao informada"}</p>
 </div>`;
@@ -70,7 +70,7 @@ function makeInternalEmail(
     to: env.CONTACT_EMAIL_TO,
     from: env.CONTACT_EMAIL_FROM,
     reply_to: env.CONTACT_EMAIL_REPLY_TO || undefined,
-    subject: `Nova solicitacao pelo site - ${input.treatmentInterest}`,
+    subject: `Nova solicitação pelo site - ${input.treatmentInterest}`,
     text,
     html
   };

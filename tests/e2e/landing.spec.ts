@@ -5,15 +5,17 @@ test("home loads MVP sections in the requested order", async ({ page }) => {
 
   await expect(page).toHaveTitle(/Orto & Implante/);
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "Estrutura provisoria para o novo site"
+    "Atendimento odontológico em Bertioga"
   );
 
   const expectedText = [
     "Diferenciais",
-    "Area pronta para tratamentos confirmados",
-    "Apresentacao institucional pendente",
-    "Respostas provisorias sobre o site",
-    "Fluxo preparado para receber canais oficiais"
+    "Principais tratamentos",
+    "Estrutura preparada para diferentes necessidades odontológicas",
+    "Tecnologia para apoiar diagnóstico",
+    "Responsável técnico",
+    "Dúvidas frequentes",
+    "Fale com a Orto & Implante"
   ];
 
   for (const text of expectedText) {
@@ -26,17 +28,17 @@ test("primary navigation reaches MVP pages", async ({ page }) => {
   await page.goto("/");
 
   const nav = page.getByRole("navigation", { name: "Navegacao principal" });
-  await nav.getByRole("link", { name: "A clinica" }).click();
+  await nav.getByRole("link", { name: "A clínica" }).click();
   await expect(page).toHaveURL("/a-clinica");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("Conteudo institucional");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Orto & Implante");
 
   await nav.getByRole("link", { name: "Tratamentos" }).click();
   await expect(page).toHaveURL("/tratamentos");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("Tratamentos a confirmar");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Tratamentos odontológicos");
 
   await nav.getByRole("link", { name: "Contato" }).click();
   await expect(page).toHaveURL("/contato");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("Pre-agendamento");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Fale com a Orto & Implante");
 });
 
 test("development noindex metadata is active by default", async ({ page }) => {

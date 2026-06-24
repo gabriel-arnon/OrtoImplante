@@ -13,8 +13,12 @@ export function SiteFooter() {
         <div>
           <BrandMark variant="dark" />
           <p className="mt-4 max-w-xl text-[0.95rem] leading-7 text-white/72">
-            Estrutura provisoria do site da {siteConfig.name}. Conteudos finais dependem de
-            confirmacao da clinica.
+            {siteConfig.name} - clínica odontológica em Bertioga/SP. Responsável técnico:
+            {" "}
+            {siteConfig.technicalDirector.name}, {siteConfig.technicalDirector.registration}.
+          </p>
+          <p className="mt-3 text-sm leading-6 text-white/68">
+            {siteConfig.clinicRegistration}. {siteConfig.insuranceNotice}.
           </p>
         </div>
         <div>
@@ -30,6 +34,11 @@ export function SiteFooter() {
                 {contactConfig.phone.value}
               </a>
             </li>
+            <li>
+              <a className={footerLinkClass} href={contactConfig.email.href}>
+                {contactConfig.email.value}
+              </a>
+            </li>
             <li>{contactConfig.address.display}</li>
           </ul>
         </div>
@@ -38,9 +47,12 @@ export function SiteFooter() {
             Informacoes
           </p>
           <ul className="mt-4 space-y-3 text-[0.95rem] text-white/78">
+            {contactConfig.openingHoursDisplay.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
             <li>
               <Link href="/politica-de-privacidade" className={footerLinkClass}>
-                Politica de Privacidade
+                Política de Privacidade
               </Link>
             </li>
             <li>

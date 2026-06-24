@@ -5,45 +5,45 @@ export const legalContentMeta = {
 export const privacySections = [
   {
     title: "Dados coletados",
-    text: "Na futura etapa funcional, o formulario podera coletar nome, telefone ou WhatsApp, cidade, categoria do assunto, descricao breve e confirmacao de ciencia sobre o uso dos dados."
+    text: "O formulário de pré-agendamento coleta nome, telefone ou WhatsApp, cidade, tratamento ou interesse, mensagem breve e confirmação de ciência sobre o uso dos dados."
   },
   {
     title: "Finalidade",
-    text: "Os dados serao utilizados para analisar e responder a solicitacao de contato, organizar o retorno inicial e permitir comunicacao relacionada ao atendimento solicitado."
+    text: "Os dados serão utilizados para analisar e responder à solicitação de contato, organizar o retorno inicial e permitir comunicação relacionada ao atendimento solicitado."
   },
   {
     title: "Cuidados no primeiro contato",
-    text: "Nao informe senhas, codigos, tokens, numeros completos de conta ou cartao, codigos de seguranca, CPF, RG ou documentos sensiveis no primeiro contato."
+    text: "Não informe senhas, códigos, tokens, números completos de conta ou cartão, códigos de segurança, CPF, RG, exames, documentos ou informações clínicas sensíveis no primeiro contato."
   },
   {
-    title: "Prestadores de servico",
-    text: "Servicos tecnicos de hospedagem, e-mail e seguranca poderao ser utilizados futuramente, sempre conforme necessidade operacional e criterios de protecao de dados."
+    title: "Prestadores de serviço",
+    text: "Serviços técnicos de hospedagem, e-mail e segurança poderão ser utilizados futuramente, sempre conforme necessidade operacional e critérios de proteção de dados."
   },
   {
-    title: "Seguranca e retencao",
-    text: "Serao adotadas medidas proporcionais para proteger os dados. Prazos e canais finais dependem de aprovacao antes da publicacao."
+    title: "Segurança e retenção",
+    text: "Serão adotadas medidas proporcionais para proteger os dados. Prazos, provedores e canais finais dependem de aprovação antes da publicação."
   },
   {
     title: "Direitos do titular",
-    text: "Solicitacoes relacionadas a dados pessoais dependerao de canal oficial a ser definido antes da publicacao."
+    text: "Solicitações relacionadas a dados pessoais poderão ser feitas pelos canais oficiais publicados pela clínica."
   }
 ] as const;
 
 export const legalNoticeSections = [
   {
-    title: "Natureza provisoria",
-    text: "Este site esta em preparacao e apresenta conteudo provisorio. As informacoes finais dependem de revisao humana antes da publicacao."
+    title: "Conteúdo informativo",
+    text: "As informações sobre tratamentos têm caráter educativo e não substituem avaliação presencial ou orientação de um dentista."
   },
   {
-    title: "Ausencia de promessa de disponibilidade",
-    text: "Nenhum conteudo provisorio deve ser interpretado como oferta final, confirmacao de atendimento ou garantia de disponibilidade."
+    title: "Ausência de promessa de resultado",
+    text: "Nenhum conteúdo do site deve ser interpretado como promessa de resultado, garantia de tratamento, diagnóstico remoto ou indicação automática."
   },
   {
     title: "Atendimento",
-    text: "Qualquer atendimento dependera de canais confirmados, equipe responsavel e validacao das informacoes recebidas."
+    text: "Todo atendimento depende de contato com a clínica, disponibilidade de agenda e avaliação individual do caso."
   },
   {
-    title: "Informacoes institucionais",
-    text: "A identificacao publica e os dados institucionais serao definidos em etapa posterior."
+    title: "Informações institucionais",
+    text: "Dados institucionais, contatos, horários e registros foram migrados a partir das informações atualmente publicadas pela clínica."
   }
 ] as const;

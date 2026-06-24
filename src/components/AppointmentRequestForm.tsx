@@ -52,7 +52,7 @@ export function AppointmentRequestForm() {
   const [submitState, setSubmitState] = useState<SubmitState>({
     type: "idle",
     message:
-      "Formulario provisorio de pre-agendamento. Nao envie documentos ou informacoes clinicas sensiveis."
+      "Formulário de pré-agendamento em modo seguro. Não envie documentos ou informações clínicas sensíveis."
   });
   const submittedOnceRef = useRef(false);
 
@@ -91,7 +91,7 @@ export function AppointmentRequestForm() {
     submittedOnceRef.current = true;
     setSubmitState({
       type: "idle",
-      message: "Enviando sua solicitacao..."
+      message: "Enviando sua solicitação..."
     });
 
     try {
@@ -159,8 +159,8 @@ export function AppointmentRequestForm() {
           Solicitar retorno
         </h2>
         <p className="mt-2 text-sm leading-6 text-graphite-soft">
-          Envie apenas dados de contato e uma mensagem curta. O retorno depende dos canais
-          oficiais que ainda serao confirmados.
+          Envie apenas dados de contato e uma mensagem curta. O envio real permanece desativado
+          nesta etapa; use WhatsApp ou telefone para contato direto.
         </p>
       </div>
 
@@ -305,8 +305,8 @@ export function AppointmentRequestForm() {
             id="security-warning"
             className="mt-2 border-l-2 border-gold bg-gold/10 px-3 py-2 text-sm leading-6 text-navy"
           >
-            Nao envie CPF, RG, exames, documentos, senhas, dados financeiros, imagens ou
-            informacoes clinicas sensiveis.
+            Não envie CPF, RG, exames, documentos, senhas, dados financeiros, imagens ou
+            informações clínicas sensíveis.
           </p>
           {errors.message ? (
             <p id={fieldErrorId("message")} className="mt-2 text-sm font-semibold text-red-700">
@@ -327,8 +327,8 @@ export function AppointmentRequestForm() {
             {...register("privacyAccepted")}
           />
           <span>
-            Li a politica de privacidade e entendo que meus dados serao usados para responder a
-            solicitacao de contato.
+            Li a política de privacidade e entendo que meus dados serão usados para responder à
+            solicitação de contato.
           </span>
         </label>
         {errors.privacyAccepted ? (
@@ -351,21 +351,23 @@ export function AppointmentRequestForm() {
           disabled={isSubmitting}
           className="min-h-12 w-full rounded-sm bg-navy px-5 font-semibold text-white transition hover:bg-navy/92 disabled:cursor-not-allowed disabled:bg-light-gray disabled:text-graphite-soft"
         >
-          {isSubmitting ? "Enviando..." : "Solicitar pre-agendamento"}
+          {isSubmitting ? "Enviando..." : "Solicitar pré-agendamento"}
         </button>
 
         <div className="grid gap-2.5 border-t border-light-gray pt-3 sm:grid-cols-2">
           <a
             href={contactConfig.whatsapp.href}
+            target="_blank"
+            rel="noreferrer"
             className="flex min-h-12 items-center justify-center rounded-sm bg-navy px-5 text-center font-semibold text-white transition hover:bg-navy/92"
           >
-            WhatsApp a confirmar
+            Chamar no WhatsApp
           </a>
           <a
             href={contactConfig.phone.href}
             className="flex min-h-12 items-center justify-center rounded-sm border border-navy px-5 text-center font-semibold text-navy transition hover:bg-navy hover:text-white"
           >
-            Telefone a confirmar
+            Ligar para a clínica
           </a>
         </div>
       </form>

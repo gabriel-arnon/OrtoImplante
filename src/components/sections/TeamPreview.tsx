@@ -14,7 +14,7 @@ export function TeamPreview() {
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-gold">Equipe</p>
             <h2 className="mt-3 text-3xl font-semibold text-navy md:text-4xl">
-              Profissionais confirmados
+              Responsável técnico
             </h2>
           </div>
           <Link href="/equipe" className="font-semibold text-navy underline-offset-4 hover:underline">

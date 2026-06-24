@@ -43,21 +43,21 @@ export const appointmentRequestSchema = z.object({
     .string({ error: "Informe seu nome." })
     .trim()
     .min(3, "Informe seu nome.")
-    .max(120, "O nome deve ter no maximo 120 caracteres."),
+    .max(120, "O nome deve ter no máximo 120 caracteres."),
   phone: z
     .string({ error: "Informe um telefone ou WhatsApp." })
     .trim()
-    .min(10, "Informe um telefone ou WhatsApp valido.")
-    .max(24, "Informe um telefone ou WhatsApp valido.")
-    .regex(phoneDigitsPattern, "Informe um telefone ou WhatsApp valido.")
+    .min(10, "Informe um telefone ou WhatsApp válido.")
+    .max(24, "Informe um telefone ou WhatsApp válido.")
+    .regex(phoneDigitsPattern, "Informe um telefone ou WhatsApp válido.")
     .refine((value) => normalizeBrazilianPhone(value) !== null, {
-      message: "Informe um telefone ou WhatsApp brasileiro valido."
+      message: "Informe um telefone ou WhatsApp brasileiro válido."
     }),
   city: z
     .string({ error: "Informe sua cidade." })
     .trim()
     .min(2, "Informe sua cidade.")
-    .max(80, "A cidade deve ter no maximo 80 caracteres."),
+    .max(80, "A cidade deve ter no máximo 80 caracteres."),
   treatmentInterest: z.enum(appointmentInterests, {
     error: "Selecione o tratamento ou interesse."
   }),
@@ -65,11 +65,11 @@ export const appointmentRequestSchema = z.object({
     .string({ error: "Escreva uma mensagem curta." })
     .trim()
     .min(CONTACT_MESSAGE_MIN, `A mensagem deve ter pelo menos ${CONTACT_MESSAGE_MIN} caracteres.`)
-    .max(CONTACT_MESSAGE_MAX, `A mensagem deve ter no maximo ${CONTACT_MESSAGE_MAX} caracteres.`),
+    .max(CONTACT_MESSAGE_MAX, `A mensagem deve ter no máximo ${CONTACT_MESSAGE_MAX} caracteres.`),
   privacyAccepted: z.literal(true, {
-    error: "Confirme que leu a politica de privacidade para continuar."
+    error: "Confirme que leu a política de privacidade para continuar."
   }),
-  company: z.string().trim().max(0, "Nao foi possivel enviar sua solicitacao.").optional(),
+  company: z.string().trim().max(0, "Não foi possível enviar sua solicitação.").optional(),
   sourcePage: z.string().trim().max(200).optional(),
   utm: z
     .object({
@@ -103,7 +103,7 @@ export function validateContactRequest(input: unknown) {
         issues: [
           {
             path: ["phone"],
-            message: "Informe um telefone ou WhatsApp brasileiro valido."
+            message: "Informe um telefone ou WhatsApp brasileiro válido."
           }
         ]
       }

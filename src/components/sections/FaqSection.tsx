@@ -34,7 +34,7 @@ export function FaqSection({ items = homeFaqItems }: FaqSectionProps) {
           Perguntas frequentes
         </p>
         <h2 className="mt-3 text-3xl font-semibold text-navy md:text-4xl">
-          Respostas provisorias sobre o site
+          Dúvidas frequentes
         </h2>
         <div className="mt-8 divide-y divide-light-gray border-y border-light-gray">
           {items.map((item, index) => {

@@ -4,8 +4,8 @@ const formData = {
   fullName: "Pessoa Teste",
   phone: "(11) 90000-0000",
   city: "Bertioga",
-  treatmentInterest: "Avaliacao inicial",
-  message: "Mensagem ficticia para validar o pre-agendamento sem dados clinicos sensiveis."
+  treatmentInterest: "Avaliação inicial",
+  message: "Mensagem fictícia para validar o pré-agendamento sem dados clínicos sensíveis."
 };
 
 async function fillValidAppointmentForm(page: Page) {
@@ -16,20 +16,20 @@ async function fillValidAppointmentForm(page: Page) {
     .getByLabel("Tratamento ou interesse", { exact: true })
     .selectOption(formData.treatmentInterest);
   await page.getByLabel("Mensagem curta", { exact: true }).fill(formData.message);
-  await page.getByLabel("Li a politica de privacidade").check();
+  await page.getByLabel("Li a política de privacidade").check();
 }
 
 test("validates appointment request form fields", async ({ page }) => {
   await page.goto("/contato");
 
-  await page.getByRole("button", { name: "Solicitar pre-agendamento" }).click();
+  await page.getByRole("button", { name: "Solicitar pré-agendamento" }).click();
 
   await expect(page.getByText("Informe seu nome.")).toBeVisible();
-  await expect(page.getByText("Informe um telefone ou WhatsApp valido.")).toBeVisible();
+  await expect(page.getByText("Informe um telefone ou WhatsApp válido.")).toBeVisible();
   await expect(page.getByText("Informe sua cidade.")).toBeVisible();
   await expect(page.getByText("Selecione o tratamento ou interesse.")).toBeVisible();
   await expect(page.getByText("A mensagem deve ter pelo menos 20 caracteres.")).toBeVisible();
-  await expect(page.getByText("Confirme que leu a politica de privacidade")).toBeVisible();
+  await expect(page.getByText("Confirme que leu a política de privacidade")).toBeVisible();
 });
 
 test("keeps entered values after failed delivery", async ({ page }) => {
@@ -47,7 +47,7 @@ test("keeps entered values after failed delivery", async ({ page }) => {
 
   await page.goto("/contato");
   await fillValidAppointmentForm(page);
-  await page.getByRole("button", { name: "Solicitar pre-agendamento" }).click();
+  await page.getByRole("button", { name: "Solicitar pré-agendamento" }).click();
 
   await expect(page.getByRole("status")).toContainText("Envio indisponivel");
   await expect(page.getByLabel("Nome", { exact: true })).toHaveValue(formData.fullName);
@@ -57,9 +57,9 @@ test("keeps entered values after failed delivery", async ({ page }) => {
 test("disabled delivery does not report success or clear entered data", async ({ page }) => {
   await page.goto("/contato");
   await fillValidAppointmentForm(page);
-  await page.getByRole("button", { name: "Solicitar pre-agendamento" }).click();
+  await page.getByRole("button", { name: "Solicitar pré-agendamento" }).click();
 
-  await expect(page.getByRole("status")).toContainText("temporariamente indisponivel");
+  await expect(page.getByRole("status")).toContainText("temporariamente indisponível");
   await expect(page.getByLabel("Nome", { exact: true })).toHaveValue(formData.fullName);
   await expect(page.getByLabel("Mensagem curta", { exact: true })).toHaveValue(formData.message);
 });

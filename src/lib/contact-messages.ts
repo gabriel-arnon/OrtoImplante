@@ -1,8 +1,8 @@
 export const contactSuccessMessage =
-  "Recebemos sua solicitacao de pre-agendamento. As informacoes serao verificadas pela equipe em ambiente local de teste.";
+  "Recebemos sua solicitação de pré-agendamento. As informações serão verificadas pela equipe em ambiente local de teste.";
 
 export const contactFailureMessage =
-  "Nao foi possivel enviar sua solicitacao neste momento. Tente novamente ou use um canal confirmado futuramente.";
+  "Não foi possível enviar sua solicitação neste momento. Tente novamente ou use WhatsApp ou telefone.";
 
 export const contactUnavailableMessage =
-  "O envio on-line esta temporariamente indisponivel enquanto os canais oficiais nao forem configurados.";
+  "O envio on-line está temporariamente indisponível nesta etapa de desenvolvimento. Use WhatsApp ou telefone para contato direto.";

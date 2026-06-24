@@ -13,7 +13,7 @@ test("mobile navigation opens, closes and links to contact", async ({ page }) =>
   await mobileNav.getByRole("link", { name: "Contato" }).click();
 
   await expect(page).toHaveURL("/contato");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("Pre-agendamento");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Fale com a Orto & Implante");
 });
 
 test("home has no horizontal overflow on mobile", async ({ page }) => {

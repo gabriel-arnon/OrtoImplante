@@ -5,12 +5,13 @@ type WhatsAppButtonProps = {
   label?: string;
 };
 
-export function WhatsAppButton({ className = "", label = "WhatsApp a confirmar" }: WhatsAppButtonProps) {
+export function WhatsAppButton({ className = "", label = "Chamar no WhatsApp" }: WhatsAppButtonProps) {
   return (
     <a
       href={contactConfig.whatsapp.href}
       className={className}
-      aria-disabled={!contactConfig.whatsapp.isConfirmed}
+      target="_blank"
+      rel="noreferrer"
     >
       {label}
     </a>

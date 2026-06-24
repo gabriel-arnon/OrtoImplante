@@ -7,7 +7,7 @@ import { breadcrumbStructuredData } from "@/lib/structured-data";
 
 export const metadata: Metadata = createMetadata({
   title: "Aviso Legal",
-  description: "Aviso Legal provisorio para site em preparacao.",
+  description: "Aviso Legal em versão de desenvolvimento para o site da Orto & Implante.",
   path: "/aviso-legal"
 });
 
@@ -34,7 +34,7 @@ export default function LegalNoticePage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             breadcrumbStructuredData([
-              { name: "Inicio", path: "/" },
+              { name: "Início", path: "/" },
               { name: "Aviso Legal", path: "/aviso-legal" }
             ])
           )
@@ -43,19 +43,19 @@ export default function LegalNoticePage() {
       <article className="section-shell py-12 md:py-16">
         <div className="mx-auto max-w-3xl">
           <Link href="/" className="text-sm font-semibold text-navy underline-offset-4 hover:underline">
-            Voltar para a pagina inicial
+            Voltar para a página inicial
           </Link>
 
           <p className="mt-8 text-sm font-semibold uppercase tracking-[0.16em] text-gold">
-            Informacao provisoria
+            Informação importante
           </p>
           <h1 className="mt-3 text-4xl font-semibold text-navy">Aviso Legal</h1>
           <p className="mt-3 text-sm font-semibold text-graphite-soft">
-            Ultima atualizacao: {legalContentMeta.lastUpdated}
+            Última atualização: {legalContentMeta.lastUpdated}
           </p>
           <p className="mt-5 text-base leading-8 text-graphite-soft">
-            Este aviso descreve limites de uso da copia atual do site {siteConfig.name}, que ainda
-            esta em preparacao.
+            Este aviso descreve limites de uso do site {siteConfig.name} durante a etapa de
+            desenvolvimento e migração de conteúdo.
           </p>
 
           <div className="mt-10 grid gap-8">
@@ -67,9 +67,9 @@ export default function LegalNoticePage() {
 
             <LegalSection title="5. Privacidade">
               <p>
-                Para informacoes sobre tratamento de dados pessoais no site, consulte a{" "}
+                Para informações sobre tratamento de dados pessoais no site, consulte a{" "}
                 <Link href="/politica-de-privacidade" className="font-semibold text-navy underline">
-                  Politica de Privacidade
+                  Política de Privacidade
                 </Link>
                 .
               </p>
@@ -80,7 +80,7 @@ export default function LegalNoticePage() {
             href="/"
             className="mt-10 inline-flex min-h-11 items-center border border-navy px-4 py-2 text-sm font-semibold text-navy transition hover:bg-navy hover:text-white focus-visible:bg-navy focus-visible:text-white"
           >
-            Voltar para a pagina inicial
+            Voltar para a página inicial
           </Link>
         </div>
       </article>

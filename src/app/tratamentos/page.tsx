@@ -6,7 +6,7 @@ import { breadcrumbStructuredData } from "@/lib/structured-data";
 
 export const metadata: Metadata = createMetadata({
   title: "Tratamentos",
-  description: "Estrutura provisoria para tratamentos da Orto & Implante.",
+  description: "Conheça os tratamentos odontológicos informados pela Orto & Implante em Bertioga/SP.",
   path: "/tratamentos"
 });
 
@@ -18,7 +18,7 @@ export default function TreatmentsPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             breadcrumbStructuredData([
-              { name: "Inicio", path: "/" },
+              { name: "Início", path: "/" },
               { name: "Tratamentos", path: "/tratamentos" }
             ])
           )
@@ -28,10 +28,10 @@ export default function TreatmentsPage() {
         <p className="text-sm font-semibold uppercase tracking-[0.16em] text-gold">
           Tratamentos
         </p>
-        <h1 className="mt-3 text-4xl font-semibold text-navy">Tratamentos a confirmar</h1>
+        <h1 className="mt-3 text-4xl font-semibold text-navy">Tratamentos odontológicos</h1>
         <p className="mt-5 max-w-3xl text-base leading-8 text-graphite-soft">
-          A lista abaixo e provisoria. Substituir por tratamentos reais somente apos confirmacao da
-          clinica.
+          A lista abaixo reúne os tratamentos atualmente informados pela clínica. As descrições são
+          educativas e cada caso exige avaliação individual para definição de conduta.
         </p>
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           {treatments.map((treatment) => (

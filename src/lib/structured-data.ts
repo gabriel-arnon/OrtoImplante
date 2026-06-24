@@ -25,6 +25,11 @@ export function dentistStructuredData() {
     url,
     areaServed: `${siteConfig.city}/${siteConfig.state}`,
     telephone: contactConfig.phone.isConfirmed ? contactConfig.phone.value : undefined,
+    email: contactConfig.email.isConfirmed ? contactConfig.email.value : undefined,
+    founder: siteConfig.technicalDirector.name,
+    foundingDate: String(siteConfig.foundedYear),
+    identifier: [siteConfig.clinicRegistration, siteConfig.technicalDirector.registration],
+    medicalSpecialty: "Dentistry",
     address: contactConfig.address.isConfirmed
       ? compact({
           "@type": "PostalAddress",
@@ -51,6 +56,12 @@ export function localBusinessStructuredData() {
     name: siteConfig.name,
     url,
     telephone: contactConfig.phone.isConfirmed ? contactConfig.phone.value : undefined,
+    email: contactConfig.email.isConfirmed ? contactConfig.email.value : undefined,
+    founder: siteConfig.technicalDirector.name,
+    foundingDate: String(siteConfig.foundedYear),
+    identifier: [siteConfig.clinicRegistration, siteConfig.technicalDirector.registration],
+    medicalSpecialty: "Dentistry",
+    paymentAccepted: "Atendimento particular",
     address: contactConfig.address.isConfirmed
       ? compact({
           "@type": "PostalAddress",

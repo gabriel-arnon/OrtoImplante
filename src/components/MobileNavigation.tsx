@@ -42,7 +42,7 @@ export function MobileNavigation({ isOpen, onClose }: MobileNavigationProps) {
               onClick={onClose}
               tabIndex={isOpen ? 0 : -1}
             >
-              Solicitar pre-agendamento
+            Solicitar pré-agendamento
             </Link>
           </li>
         </ul>

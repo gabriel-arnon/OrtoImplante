@@ -1,7 +1,12 @@
 const differentials = [
-  "Diferencial a confirmar",
-  "Informacao institucional pendente",
-  "Canais oficiais ainda nao configurados"
+  "Equipe de dentistas especialistas",
+  "Scanner intraoral e planejamento digital",
+  "Simulações em 3D",
+  "Sala de espera ampla",
+  "Som ambiente, café e TVs",
+  "Ambientes para recuperação pós-operatória",
+  "Fácil estacionamento",
+  "Acessibilidade"
 ] as const;
 
 export function Differentials() {
@@ -12,14 +17,14 @@ export function Differentials() {
           Diferenciais
         </p>
         <h2 className="mt-3 text-3xl font-semibold text-navy md:text-4xl">
-          Bloco preparado para informacoes confirmadas
+          Diferenciais informados pela clínica
         </h2>
-        <ul className="mt-8 grid gap-4 md:grid-cols-3">
+        <ul className="mt-8 grid gap-4 md:grid-cols-4">
           {differentials.map((item) => (
             <li key={item} className="border border-light-gray bg-light-gray/20 p-5">
               <p className="font-semibold text-navy">{item}</p>
               <p className="mt-3 text-sm leading-6 text-graphite-soft">
-                Placeholder provisorio. Substituir somente por informacao validada pela clinica.
+                Recurso informado no site atual da Orto & Implante e migrado para esta etapa.
               </p>
             </li>
           ))}
