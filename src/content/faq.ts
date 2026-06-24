@@ -1,27 +1,30 @@
+export type FaqItem = {
+  question: string;
+  answer: string;
+  context?: "home" | "contact" | "treatment" | "legal";
+};
+
 export const faqItems = [
   {
-    question: "O site ja esta pronto para publicacao?",
+    question: "As informacoes do site ja sao definitivas?",
     answer:
-      "Nao. Esta copia esta em preparacao e deve receber conteudo, identidade e configuracoes aprovadas antes da publicacao."
+      "Nao. Esta fase cria a estrutura do site com placeholders ate a clinica confirmar conteudos, contatos e imagens.",
+    context: "home"
   },
   {
-    question: "Posso enviar documentos ou dados sensiveis?",
+    question: "Posso enviar documentos pelo formulario?",
     answer:
-      "Nao. O contato inicial deve conter apenas dados minimos para retorno, sem documentos, senhas, tokens ou informacoes financeiras completas."
+      "Nao. O formulario de pre-agendamento nao solicita documentos, exames, CPF, RG ou informacoes clinicas sensiveis.",
+    context: "contact"
   },
   {
-    question: "Os canais de atendimento ja estao definidos?",
+    question: "O WhatsApp ja esta configurado?",
     answer:
-      "Ainda nao. Telefones, e-mails, enderecos e canais externos devem ser confirmados antes de qualquer publicacao."
-  },
-  {
-    question: "O formulario esta pronto para producao?",
-    answer:
-      "Nao. Em preview e producao ele deve permanecer desativado ate existir dominio real, remetente verificado e controle externo de abuso."
-  },
-  {
-    question: "Este conteudo e definitivo?",
-    answer:
-      "Nao. Os textos atuais sao placeholders neutros para preservar a estrutura tecnica sem reaproveitar conteudo do projeto anterior."
+      "Ainda nao. O botao usa placeholder ate a clinica confirmar o numero oficial e a mensagem de atendimento.",
+    context: "contact"
   }
-] as const;
+] satisfies FaqItem[];
+
+export const homeFaqItems = faqItems.filter(
+  (item) => item.context === "home" || item.context === "contact"
+);

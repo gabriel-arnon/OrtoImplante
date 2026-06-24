@@ -62,13 +62,13 @@ export default async function globalSetup() {
   try {
     const child = spawn(
       process.execPath,
-      ["node_modules/next/dist/bin/next", "dev", "--hostname", "127.0.0.1", "--port", "3100"],
+      ["node_modules/next/dist/bin/next", "start", "--hostname", "127.0.0.1", "--port", "3100"],
       {
         cwd: process.cwd(),
         detached: true,
         env: {
           ...safePlaywrightEnv(),
-          CONTACT_FORM_MODE: "mock",
+          CONTACT_FORM_MODE: "disabled",
           CONTACT_EMAIL_PROVIDER: "",
           CONTACT_EMAIL_FROM: "",
           CONTACT_EMAIL_REPLY_TO: "",

@@ -5,7 +5,11 @@ import {
   contactSuccessMessage,
   contactUnavailableMessage
 } from "@/lib/contact-messages";
-import type { ContactApiFailure, ContactApiResponse, ContactFormInput } from "@/lib/contact-schema";
+import type {
+  AppointmentRequestInput,
+  ContactApiFailure,
+  ContactApiResponse
+} from "@/lib/contact-schema";
 import { validateContactRequest } from "@/lib/contact-schema";
 import { getContactDeliveryProvider } from "@/lib/contact-delivery";
 import { validateServerEnv } from "@/lib/env-config";
@@ -35,7 +39,7 @@ function fieldErrorsFromIssues(
 
   for (const issue of issues) {
     const path = issue.path[0];
-    const field = typeof path === "string" ? (path as keyof ContactFormInput) : undefined;
+    const field = typeof path === "string" ? (path as keyof AppointmentRequestInput) : undefined;
     if (field && !fieldErrors[field]) {
       fieldErrors[field] = issue.message;
     }

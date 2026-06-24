@@ -1,8 +1,8 @@
 import { z } from "zod";
-import { contactIssueCategories } from "@/content/services";
+import { appointmentInterests } from "@/content/contact";
 
-export const CONTACT_DESCRIPTION_MIN = 30;
-export const CONTACT_DESCRIPTION_MAX = 1000;
+export const CONTACT_MESSAGE_MIN = 20;
+export const CONTACT_MESSAGE_MAX = 700;
 export const APPROVED_UTM_FIELDS = [
   "utm_source",
   "utm_medium",
@@ -11,7 +11,6 @@ export const APPROVED_UTM_FIELDS = [
   "utm_content"
 ] as const;
 
-const issueCategories = contactIssueCategories;
 const phoneDigitsPattern = /^\+?[\d\s().-]{10,24}$/;
 
 function sanitizeUtmValue(value: unknown) {
@@ -39,44 +38,38 @@ export function normalizeBrazilianPhone(value: string) {
   return `+55${withoutCountry}`;
 }
 
-export const contactFormSchema = z.object({
+export const appointmentRequestSchema = z.object({
   fullName: z
-    .string({ error: "Informe seu nome completo." })
+    .string({ error: "Informe seu nome." })
     .trim()
-    .min(3, "Informe seu nome completo.")
-    .max(120, "O nome deve ter no máximo 120 caracteres."),
+    .min(3, "Informe seu nome.")
+    .max(120, "O nome deve ter no maximo 120 caracteres."),
   phone: z
     .string({ error: "Informe um telefone ou WhatsApp." })
     .trim()
-    .min(10, "Informe um telefone ou WhatsApp válido.")
-    .max(24, "Informe um telefone ou WhatsApp válido.")
-    .regex(phoneDigitsPattern, "Informe um telefone ou WhatsApp válido.")
+    .min(10, "Informe um telefone ou WhatsApp valido.")
+    .max(24, "Informe um telefone ou WhatsApp valido.")
+    .regex(phoneDigitsPattern, "Informe um telefone ou WhatsApp valido.")
     .refine((value) => normalizeBrazilianPhone(value) !== null, {
-      message: "Informe um telefone ou WhatsApp brasileiro válido."
+      message: "Informe um telefone ou WhatsApp brasileiro valido."
     }),
   city: z
     .string({ error: "Informe sua cidade." })
     .trim()
     .min(2, "Informe sua cidade.")
-    .max(80, "A cidade deve ter no máximo 80 caracteres."),
-  issueCategory: z.enum(issueCategories, {
-    error: "Selecione o tipo de assunto."
+    .max(80, "A cidade deve ter no maximo 80 caracteres."),
+  treatmentInterest: z.enum(appointmentInterests, {
+    error: "Selecione o tratamento ou interesse."
   }),
-  description: z
-    .string({ error: "Descreva brevemente o ocorrido." })
+  message: z
+    .string({ error: "Escreva uma mensagem curta." })
     .trim()
-    .min(
-      CONTACT_DESCRIPTION_MIN,
-      `A descrição deve ter pelo menos ${CONTACT_DESCRIPTION_MIN} caracteres.`
-    )
-    .max(
-      CONTACT_DESCRIPTION_MAX,
-      `A descrição deve ter no máximo ${CONTACT_DESCRIPTION_MAX} caracteres.`
-    ),
+    .min(CONTACT_MESSAGE_MIN, `A mensagem deve ter pelo menos ${CONTACT_MESSAGE_MIN} caracteres.`)
+    .max(CONTACT_MESSAGE_MAX, `A mensagem deve ter no maximo ${CONTACT_MESSAGE_MAX} caracteres.`),
   privacyAccepted: z.literal(true, {
-    error: "Confirme que leu o aviso de privacidade para continuar."
+    error: "Confirme que leu a politica de privacidade para continuar."
   }),
-  company: z.string().trim().max(0, "Não foi possível enviar sua solicitação.").optional(),
+  company: z.string().trim().max(0, "Nao foi possivel enviar sua solicitacao.").optional(),
   sourcePage: z.string().trim().max(200).optional(),
   utm: z
     .object({
@@ -90,13 +83,13 @@ export const contactFormSchema = z.object({
     .optional()
 });
 
-export type ContactFormInput = z.input<typeof contactFormSchema>;
-export type ValidatedContactRequest = z.output<typeof contactFormSchema> & {
+export type AppointmentRequestInput = z.input<typeof appointmentRequestSchema>;
+export type ValidatedContactRequest = z.output<typeof appointmentRequestSchema> & {
   normalizedPhone: string;
 };
 
 export function validateContactRequest(input: unknown) {
-  const parsed = contactFormSchema.safeParse(input);
+  const parsed = appointmentRequestSchema.safeParse(input);
 
   if (!parsed.success) {
     return parsed;
@@ -110,7 +103,7 @@ export function validateContactRequest(input: unknown) {
         issues: [
           {
             path: ["phone"],
-            message: "Informe um telefone ou WhatsApp brasileiro válido."
+            message: "Informe um telefone ou WhatsApp brasileiro valido."
           }
         ]
       }
@@ -143,7 +136,7 @@ export type ContactApiFailure = {
     | "delivery_failed"
     | "request_too_large";
   message: string;
-  fieldErrors?: Partial<Record<keyof ContactFormInput, string>>;
+  fieldErrors?: Partial<Record<keyof AppointmentRequestInput, string>>;
 };
 
 export type ContactApiResponse = ContactApiSuccess | ContactApiFailure;

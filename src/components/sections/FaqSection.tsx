@@ -1,10 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { faqItems } from "@/content/faq";
+import type { FaqItem } from "@/content/faq";
+import { homeFaqItems } from "@/content/faq";
 
-export function Faq() {
+type FaqSectionProps = {
+  items?: FaqItem[];
+};
+
+export function FaqSection({ items = homeFaqItems }: FaqSectionProps) {
   const [openQuestions, setOpenQuestions] = useState<Set<number>>(new Set());
+
+  if (!items.length) {
+    return null;
+  }
 
   function toggleQuestion(index: number) {
     setOpenQuestions((current) => {
@@ -25,10 +34,10 @@ export function Faq() {
           Perguntas frequentes
         </p>
         <h2 className="mt-3 text-3xl font-semibold text-navy md:text-4xl">
-          Respostas objetivas para o primeiro contato
+          Respostas provisorias sobre o site
         </h2>
         <div className="mt-8 divide-y divide-light-gray border-y border-light-gray">
-          {faqItems.map((item, index) => {
+          {items.map((item, index) => {
             const isOpen = openQuestions.has(index);
             const answerId = `faq-answer-${index}`;
 

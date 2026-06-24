@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
+import { SiteFooter } from "@/components/SiteFooter";
+import { SiteHeader } from "@/components/SiteHeader";
 import { createMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createMetadata();
@@ -14,9 +14,9 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className="min-h-screen bg-white text-graphite antialiased">
-        <Header />
+        <SiteHeader />
         {children}
-        <Footer />
+        <SiteFooter />
       </body>
     </html>
   );

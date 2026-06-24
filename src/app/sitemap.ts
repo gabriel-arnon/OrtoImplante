@@ -1,33 +1,28 @@
 import type { MetadataRoute } from "next";
+import { treatments } from "@/content/treatments";
 import { absoluteUrl } from "@/lib/utils";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const home = absoluteUrl("/");
-  const privacy = absoluteUrl("/politica-de-privacidade");
-  const legal = absoluteUrl("/aviso-legal");
+  const paths = [
+    "/",
+    "/a-clinica",
+    "/tratamentos",
+    ...treatments.map((treatment) => `/tratamentos/${treatment.slug}`),
+    "/equipe",
+    "/contato",
+    "/politica-de-privacidade",
+    "/aviso-legal"
+  ];
+  const urls = paths.map((path) => absoluteUrl(path));
 
-  if (!home || !privacy || !legal) {
+  if (urls.some((url) => !url)) {
     return [];
   }
 
-  return [
-    {
-      url: home,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 1
-    },
-    {
-      url: privacy,
-      lastModified: new Date(),
-      changeFrequency: "yearly",
-      priority: 0.4
-    },
-    {
-      url: legal,
-      lastModified: new Date(),
-      changeFrequency: "yearly",
-      priority: 0.4
-    }
-  ];
+  return urls.map((url, index) => ({
+    url: String(url),
+    lastModified: new Date(),
+    changeFrequency: index === 0 ? "monthly" : "yearly",
+    priority: index === 0 ? 1 : 0.6
+  }));
 }

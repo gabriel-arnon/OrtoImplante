@@ -3,13 +3,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMemo, useRef, useState } from "react";
 import { type Resolver, useForm } from "react-hook-form";
-import { contactIssueCategories } from "@/content/services";
-import { siteConfig } from "@/content/site";
+import { appointmentInterests, contactConfig } from "@/content/contact";
 import {
   APPROVED_UTM_FIELDS,
-  contactFormSchema,
-  type ContactApiResponse,
-  type ContactFormInput
+  appointmentRequestSchema,
+  type AppointmentRequestInput,
+  type ContactApiResponse
 } from "@/lib/contact-schema";
 import { contactFailureMessage } from "@/lib/contact-messages";
 
@@ -17,8 +16,8 @@ type FormValues = {
   fullName: string;
   phone: string;
   city: string;
-  issueCategory: string;
-  description: string;
+  treatmentInterest: string;
+  message: string;
   privacyAccepted: boolean;
   company: string;
   sourcePage?: string;
@@ -49,10 +48,11 @@ function fieldErrorId(field: keyof FormValues) {
   return `${field}-error`;
 }
 
-export function VisualContactForm() {
+export function AppointmentRequestForm() {
   const [submitState, setSubmitState] = useState<SubmitState>({
     type: "idle",
-    message: "Preencha os campos para solicitar contato. O envio é seguro e não solicita documentos."
+    message:
+      "Formulario provisorio de pre-agendamento. Nao envie documentos ou informacoes clinicas sensiveis."
   });
   const submittedOnceRef = useRef(false);
 
@@ -61,8 +61,8 @@ export function VisualContactForm() {
       fullName: "",
       phone: "",
       city: "",
-      issueCategory: "",
-      description: "",
+      treatmentInterest: "",
+      message: "",
       privacyAccepted: false,
       company: "",
       sourcePage: typeof window === "undefined" ? "/" : window.location.pathname,
@@ -79,7 +79,7 @@ export function VisualContactForm() {
     setError
   } = useForm<FormValues>({
     defaultValues,
-    resolver: zodResolver(contactFormSchema) as Resolver<FormValues>,
+    resolver: zodResolver(appointmentRequestSchema) as Resolver<FormValues>,
     shouldFocusError: true
   });
 
@@ -91,7 +91,7 @@ export function VisualContactForm() {
     submittedOnceRef.current = true;
     setSubmitState({
       type: "idle",
-      message: "Enviando sua solicitação..."
+      message: "Enviando sua solicitacao..."
     });
 
     try {
@@ -115,7 +115,7 @@ export function VisualContactForm() {
 
       if (result.fieldErrors) {
         for (const [field, message] of Object.entries(result.fieldErrors)) {
-          setError(field as keyof ContactFormInput & keyof FormValues, {
+          setError(field as keyof AppointmentRequestInput & keyof FormValues, {
             type: "server",
             message
           });
@@ -150,7 +150,7 @@ export function VisualContactForm() {
     >
       <div className="mb-4 border-b border-light-gray pb-4">
         <p className="text-sm font-semibold uppercase tracking-[0.16em] text-gold">
-          Contato inicial
+          Pre-agendamento
         </p>
         <h2
           id="formulario-contato-heading"
@@ -159,7 +159,8 @@ export function VisualContactForm() {
           Solicitar retorno
         </h2>
         <p className="mt-2 text-sm leading-6 text-graphite-soft">
-          Envie um resumo seguro da situação para análise inicial e retorno pelos canais informados.
+          Envie apenas dados de contato e uma mensagem curta. O retorno depende dos canais
+          oficiais que ainda serao confirmados.
         </p>
       </div>
 
@@ -187,7 +188,7 @@ export function VisualContactForm() {
 
         <div>
           <label htmlFor="fullName" className="text-[0.95rem] font-semibold text-navy">
-            Nome completo
+            Nome
           </label>
           <input
             id="fullName"
@@ -216,7 +217,7 @@ export function VisualContactForm() {
               id="phone"
               type="tel"
               autoComplete="tel"
-              placeholder="(13) 00000-0000"
+              placeholder="(00) 00000-0000"
               aria-invalid={Boolean(errors.phone)}
               aria-describedby={errors.phone ? fieldErrorId("phone") : undefined}
               className="mt-1.5 min-h-12 w-full rounded-sm border border-light-gray px-3.5 text-base transition focus:border-gold disabled:bg-light-gray/40"
@@ -254,59 +255,62 @@ export function VisualContactForm() {
         </div>
 
         <div>
-          <label htmlFor="issueCategory" className="text-[0.95rem] font-semibold text-navy">
-            Tipo de assunto
+          <label htmlFor="treatmentInterest" className="text-[0.95rem] font-semibold text-navy">
+            Tratamento ou interesse
           </label>
           <select
-            id="issueCategory"
-            aria-invalid={Boolean(errors.issueCategory)}
-            aria-describedby={errors.issueCategory ? fieldErrorId("issueCategory") : undefined}
+            id="treatmentInterest"
+            aria-invalid={Boolean(errors.treatmentInterest)}
+            aria-describedby={
+              errors.treatmentInterest ? fieldErrorId("treatmentInterest") : undefined
+            }
             className="mt-1.5 min-h-12 w-full rounded-sm border border-light-gray bg-white px-3.5 text-base transition focus:border-gold disabled:bg-light-gray/40"
             disabled={isSubmitting}
-            {...register("issueCategory")}
+            {...register("treatmentInterest")}
           >
-            <option value="">Selecione uma opção</option>
-            {contactIssueCategories.map((item) => (
+            <option value="">Selecione uma opcao</option>
+            {appointmentInterests.map((item) => (
               <option key={item} value={item}>
                 {item}
               </option>
             ))}
           </select>
-          {errors.issueCategory ? (
-            <p id={fieldErrorId("issueCategory")} className="mt-2 text-sm font-semibold text-red-700">
-              {errors.issueCategory.message}
+          {errors.treatmentInterest ? (
+            <p
+              id={fieldErrorId("treatmentInterest")}
+              className="mt-2 text-sm font-semibold text-red-700"
+            >
+              {errors.treatmentInterest.message}
             </p>
           ) : null}
         </div>
 
         <div>
-          <label htmlFor="description" className="text-[0.95rem] font-semibold text-navy">
-            Breve descrição
+          <label htmlFor="message" className="text-[0.95rem] font-semibold text-navy">
+            Mensagem curta
           </label>
           <textarea
-            id="description"
+            id="message"
             rows={4}
-            placeholder="Descreva brevemente o ocorrido."
-            aria-invalid={Boolean(errors.description)}
+            placeholder="Escreva uma mensagem breve."
+            aria-invalid={Boolean(errors.message)}
             aria-describedby={
-              errors.description
-                ? `${fieldErrorId("description")} security-warning`
-                : "security-warning"
+              errors.message ? `${fieldErrorId("message")} security-warning` : "security-warning"
             }
             className="mt-1.5 w-full rounded-sm border border-light-gray px-3.5 py-2.5 text-base leading-7 transition focus:border-gold disabled:bg-light-gray/40"
             disabled={isSubmitting}
-            {...register("description")}
+            {...register("message")}
           />
           <p
             id="security-warning"
             className="mt-2 border-l-2 border-gold bg-gold/10 px-3 py-2 text-sm leading-6 text-navy"
           >
-            Descreva brevemente o ocorrido. Não informe senhas, códigos, tokens, números completos
-            de conta ou cartão.
+            Nao envie CPF, RG, exames, documentos, senhas, dados financeiros, imagens ou
+            informacoes clinicas sensiveis.
           </p>
-          {errors.description ? (
-            <p id={fieldErrorId("description")} className="mt-2 text-sm font-semibold text-red-700">
-              {errors.description.message}
+          {errors.message ? (
+            <p id={fieldErrorId("message")} className="mt-2 text-sm font-semibold text-red-700">
+              {errors.message.message}
             </p>
           ) : null}
         </div>
@@ -323,8 +327,8 @@ export function VisualContactForm() {
             {...register("privacyAccepted")}
           />
           <span>
-            Declaro que li o aviso de privacidade e estou ciente de que meus dados serão utilizados
-            para analisar e responder à solicitação de contato.
+            Li a politica de privacidade e entendo que meus dados serao usados para responder a
+            solicitacao de contato.
           </span>
         </label>
         {errors.privacyAccepted ? (
@@ -347,21 +351,21 @@ export function VisualContactForm() {
           disabled={isSubmitting}
           className="min-h-12 w-full rounded-sm bg-navy px-5 font-semibold text-white transition hover:bg-navy/92 disabled:cursor-not-allowed disabled:bg-light-gray disabled:text-graphite-soft"
         >
-          {isSubmitting ? "Enviando..." : "Enviar solicitação"}
+          {isSubmitting ? "Enviando..." : "Solicitar pre-agendamento"}
         </button>
 
         <div className="grid gap-2.5 border-t border-light-gray pt-3 sm:grid-cols-2">
           <a
-            href={siteConfig.whatsappHref}
+            href={contactConfig.whatsapp.href}
             className="flex min-h-12 items-center justify-center rounded-sm bg-navy px-5 text-center font-semibold text-white transition hover:bg-navy/92"
           >
-            Falar pelo WhatsApp
+            WhatsApp a confirmar
           </a>
           <a
-            href={siteConfig.phoneHref}
+            href={contactConfig.phone.href}
             className="flex min-h-12 items-center justify-center rounded-sm border border-navy px-5 text-center font-semibold text-navy transition hover:bg-navy hover:text-white"
           >
-            Ligar agora
+            Telefone a confirmar
           </a>
         </div>
       </form>

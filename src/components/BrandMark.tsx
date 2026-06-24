@@ -24,26 +24,26 @@ export function BrandMark({ variant = "light" }: BrandMarkProps) {
       >
         <svg viewBox="0 0 48 48" className="h-10 w-10" role="img">
           <path
-            d="M12 12h24v24H12zM18 18h12M18 24h8M18 30h14"
+            d="M14 29c0-8 4-14 10-14s10 6 10 14M18 29h12M21 34h6M24 14v22"
             fill="none"
             stroke="currentColor"
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth="2.7"
           />
-          <circle cx="34" cy="18" r="3" fill="#C9A459" />
+          <circle cx="24" cy="14" r="3" fill="#C9A459" />
         </svg>
       </span>
       <span className="leading-tight">
         <span className="block font-serif text-2xl font-semibold tracking-normal md:text-[1.7rem]">
-          Projeto
+          {siteConfig.shortName}
         </span>
         <span
           className={`block text-xs font-bold uppercase tracking-[0.24em] ${
             isDark ? "text-gold" : "text-graphite-soft"
           }`}
         >
-          EM PREPARACAO
+          SITE PROVISORIO
         </span>
       </span>
     </Link>

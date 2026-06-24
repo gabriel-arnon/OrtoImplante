@@ -10,7 +10,7 @@ type MetadataOptions = {
 
 export function createMetadata({
   title,
-  description = siteConfig.siteDescription,
+  description = siteConfig.description,
   path = "/"
 }: MetadataOptions = {}): Metadata {
   const pageTitle = title ? `${title} | ${siteConfig.name}` : siteConfig.name;

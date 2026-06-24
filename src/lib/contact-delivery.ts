@@ -37,40 +37,40 @@ function makeInternalEmail(
     .filter(([, value]) => value)
     .map(([key, value]) => `${key}: ${textOnly(String(value))}`);
   const text = [
-    `ID da solicitação: ${requestId}`,
+    `ID da solicitacao: ${requestId}`,
     `Data e hora: ${submittedAt}`,
     `Nome: ${textOnly(input.fullName)}`,
     `Telefone/WhatsApp: ${textOnly(input.phone)}`,
     `Telefone normalizado: ${input.normalizedPhone}`,
     `Cidade: ${textOnly(input.city)}`,
-    `Categoria: ${textOnly(input.issueCategory)}`,
-    "Descrição:",
-    textOnly(input.description),
-    `Ciência do aviso de privacidade: ${input.privacyAccepted ? "sim" : "não"}`,
-    `Página de origem: ${textOnly(input.sourcePage || "/")}`,
-    utmLines.length ? `Campanha:\n${utmLines.join("\n")}` : "Campanha: não informada"
+    `Interesse: ${textOnly(input.treatmentInterest)}`,
+    "Mensagem:",
+    textOnly(input.message),
+    `Ciencia da politica de privacidade: ${input.privacyAccepted ? "sim" : "nao"}`,
+    `Pagina de origem: ${textOnly(input.sourcePage || "/")}`,
+    utmLines.length ? `Campanha:\n${utmLines.join("\n")}` : "Campanha: nao informada"
   ].join("\n\n");
 
   const html = `<div>
-  <p><strong>ID da solicitação:</strong> ${escapeHtml(requestId)}</p>
+  <p><strong>ID da solicitacao:</strong> ${escapeHtml(requestId)}</p>
   <p><strong>Data e hora:</strong> ${escapeHtml(submittedAt)}</p>
   <p><strong>Nome:</strong> ${escapeHtml(input.fullName)}</p>
   <p><strong>Telefone/WhatsApp:</strong> ${escapeHtml(input.phone)}</p>
   <p><strong>Telefone normalizado:</strong> ${escapeHtml(input.normalizedPhone)}</p>
   <p><strong>Cidade:</strong> ${escapeHtml(input.city)}</p>
-  <p><strong>Categoria:</strong> ${escapeHtml(input.issueCategory)}</p>
-  <p><strong>Descrição:</strong></p>
-  <p>${escapeHtml(input.description).replace(/\n/g, "<br />")}</p>
-  <p><strong>Ciência do aviso de privacidade:</strong> ${input.privacyAccepted ? "sim" : "não"}</p>
-  <p><strong>Página de origem:</strong> ${escapeHtml(input.sourcePage || "/")}</p>
-  <p><strong>Campanha:</strong> ${utmLines.length ? escapeHtml(utmLines.join(" | ")) : "não informada"}</p>
+  <p><strong>Interesse:</strong> ${escapeHtml(input.treatmentInterest)}</p>
+  <p><strong>Mensagem:</strong></p>
+  <p>${escapeHtml(input.message).replace(/\n/g, "<br />")}</p>
+  <p><strong>Ciencia da politica de privacidade:</strong> ${input.privacyAccepted ? "sim" : "nao"}</p>
+  <p><strong>Pagina de origem:</strong> ${escapeHtml(input.sourcePage || "/")}</p>
+  <p><strong>Campanha:</strong> ${utmLines.length ? escapeHtml(utmLines.join(" | ")) : "nao informada"}</p>
 </div>`;
 
   return {
     to: env.CONTACT_EMAIL_TO,
     from: env.CONTACT_EMAIL_FROM,
     reply_to: env.CONTACT_EMAIL_REPLY_TO || undefined,
-    subject: `Nova solicitação pelo site — ${input.issueCategory}`,
+    subject: `Nova solicitacao pelo site - ${input.treatmentInterest}`,
     text,
     html
   };

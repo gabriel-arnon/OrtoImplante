@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700" role="img" aria-label="Placeholder de tratamento">
+  <rect width="1000" height="700" fill="#F4F7F8"/>
+  <path d="M500 170c105 0 190 86 190 190s-85 190-190 190-190-86-190-190 85-190 190-190Z" fill="none" stroke="#D2DCDF" stroke-width="8"/>
+  <text x="500" y="375" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="38" fill="#263238">Tratamento a confirmar</text>
+</svg>

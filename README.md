@@ -1,8 +1,10 @@
-# Projeto em Preparacao
+# Orto & Implante
 
-Aplicacao Next.js em fase de limpeza para novo desenvolvimento. Esta copia preserva a arquitetura tecnica reutilizavel e remove referencias, dados pessoais e assets especificos do projeto anterior.
+Site Next.js em fase estrutural para a clinica Orto & Implante, de Bertioga/SP.
 
-## Scripts
+Esta fase cria rotas, componentes reutilizaveis, modelos de conteudo e formulario seguro com placeholders. Nao ha indexacao, analytics, deploy, dominio canonico ou envio real de e-mail habilitado.
+
+## Comandos
 
 ```bash
 npm run dev
@@ -12,26 +14,79 @@ npm run build
 npm run test:e2e
 ```
 
-## Ambiente
+No Windows/PowerShell, use `npm.cmd run ...` se `npm.ps1` estiver bloqueado pela politica local.
 
-Use `.env.example` como referencia. Valores reais devem ficar fora do Git.
+## Rotas
 
-- `NEXT_PUBLIC_SITE_URL` deve permanecer vazio ate o dominio final ser confirmado.
-- `NEXT_PUBLIC_INDEXING_ENABLED=false` deve permanecer ate aprovacao final.
-- `CONTACT_FORM_MODE=mock` e permitido apenas localmente e em testes.
-- Preview e producao devem usar `CONTACT_FORM_MODE=disabled` ate configuracao completa.
-- Credenciais de e-mail, rate limit e provedores externos devem ficar somente em variaveis de ambiente server-side.
+- `/`
+- `/a-clinica`
+- `/tratamentos`
+- `/tratamentos/[slug]`
+- `/equipe`
+- `/contato`
+- `/politica-de-privacidade`
+- `/aviso-legal`
 
-## Estado Atual
+## Estrutura Criada
 
-- Conteudo publico substituido por placeholders neutros.
-- Formulario preservado com campos minimos.
-- Structured data juridico removido.
-- Assets especificos do projeto anterior devem permanecer removidos ou substituidos antes da publicacao.
+- `src/content/site.ts`: dados gerais e navegacao.
+- `src/content/contact.ts`: canais, endereco, horarios e interesses do formulario.
+- `src/content/treatments.ts`: tratamentos tipados e slugs.
+- `src/content/professionals.ts`: profissionais tipados.
+- `src/content/faq.ts`: perguntas frequentes tipadas.
+- `src/content/testimonials.ts`: depoimentos aprovados, vazio por padrao.
+- `src/components/SiteHeader.tsx`, `MobileNavigation.tsx`, `SiteFooter.tsx`, `BrandMark.tsx`, `WhatsAppButton.tsx`.
+- `src/components/AppointmentRequestForm.tsx`.
+- `src/components/sections/*`: secoes reutilizaveis do MVP.
 
-## Checklist Antes de Novo Desenvolvimento
+## Placeholders
 
-- Confirmar identidade, dominio, canais e politica de privacidade finais.
-- Configurar provedor real de e-mail somente apos dominio/remetente verificados.
-- Configurar rate limiting externo para ambientes serverless.
-- Revisar testes E2E quando o conteudo final for definido.
+Os textos e imagens atuais sao provisorios. Substitua somente com informacoes confirmadas pela clinica.
+
+Pastas de imagens:
+
+- `public/images/clinic`
+- `public/images/team`
+- `public/images/treatments`
+- `public/images/brand`
+- `public/images/og`
+
+## Adicionar Tratamentos
+
+Edite `src/content/treatments.ts` e adicione itens com:
+
+- `slug`;
+- `title`;
+- `summary`;
+- `description`;
+- `featured`;
+- `faq`;
+- imagem opcional aprovada.
+
+Nao adicionar tratamentos nao confirmados.
+
+## Adicionar Profissionais
+
+Edite `src/content/professionals.ts` somente com dados aprovados:
+
+- nome;
+- funcao;
+- registro profissional;
+- bio curta;
+- imagem autorizada opcional.
+
+Nao inventar nomes, CROs, cargos ou especialidades.
+
+## Configurar Contato Futuramente
+
+Edite `src/content/contact.ts` com telefone, WhatsApp, e-mail, endereco, mapa e horarios confirmados.
+
+Preview e producao devem permanecer com `CONTACT_FORM_MODE=disabled` ate:
+
+- dominio final aprovado;
+- remetente verificado;
+- provedor de e-mail configurado;
+- rate limiting externo ativo;
+- politica de privacidade final aprovada.
+
+`NEXT_PUBLIC_SITE_URL` deve permanecer vazio e `NEXT_PUBLIC_INDEXING_ENABLED=false` ate aprovacao final.

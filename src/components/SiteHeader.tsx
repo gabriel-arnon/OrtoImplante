@@ -3,9 +3,8 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { BrandMark } from "@/components/BrandMark";
+import { MobileNavigation, mobileMenuId } from "@/components/MobileNavigation";
 import { siteConfig } from "@/content/site";
-
-const mobileMenuId = "mobile-navigation";
 
 function MenuIcon({ isOpen }: { isOpen: boolean }) {
   return (
@@ -31,7 +30,7 @@ function MenuIcon({ isOpen }: { isOpen: boolean }) {
   );
 }
 
-export function Header() {
+export function SiteHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
 
@@ -51,7 +50,6 @@ export function Header() {
 
     const closeOnOutsideClick = (event: MouseEvent) => {
       const target = event.target;
-
       if (target instanceof Node && !headerRef.current?.contains(target)) {
         setIsMobileMenuOpen(false);
       }
@@ -76,16 +74,11 @@ export function Header() {
     >
       <div className="section-shell relative flex min-h-20 flex-col gap-4 py-3 md:min-h-24 md:py-4 lg:min-h-28 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex items-center justify-between gap-4">
-          <div className="flex flex-col gap-1">
-            <BrandMark variant="dark" />
-            <p className="ml-[4.5rem] text-xs font-semibold uppercase tracking-[0.16em] text-white/72 md:ml-[4.75rem]">
-              {siteConfig.registration}
-            </p>
-          </div>
+          <BrandMark variant="dark" />
           <button
             type="button"
             className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-sm border border-gold/55 text-white transition duration-150 hover:bg-white/10 focus-visible:border-white focus-visible:bg-white focus-visible:text-navy md:hidden"
-            aria-label={isMobileMenuOpen ? "Fechar menu de navegação" : "Abrir menu de navegação"}
+            aria-label={isMobileMenuOpen ? "Fechar menu de navegacao" : "Abrir menu de navegacao"}
             aria-expanded={isMobileMenuOpen}
             aria-controls={mobileMenuId}
             onClick={() => setIsMobileMenuOpen((current) => !current)}
@@ -93,15 +86,15 @@ export function Header() {
             <MenuIcon isOpen={isMobileMenuOpen} />
           </button>
           <Link
-            href="/#formulario-contato"
+            href="/contato#formulario-contato"
             className="hidden min-h-11 items-center justify-center rounded-sm border border-gold bg-gold px-4 text-sm font-semibold text-navy transition hover:bg-white hover:text-navy focus-visible:bg-white focus-visible:text-navy md:flex lg:hidden"
           >
-            Solicitar contato
+            Pre-agendamento
           </Link>
         </div>
         <div className="flex items-center gap-4 lg:gap-5">
           <nav
-            aria-label="Navegação principal"
+            aria-label="Navegacao principal"
             className="-mx-1 hidden overflow-x-auto pb-1 md:block lg:mx-0 lg:overflow-visible lg:pb-0"
           >
             <ul className="flex min-w-max gap-1 text-[0.92rem] font-semibold text-white/82 lg:justify-end lg:gap-2">
@@ -118,48 +111,13 @@ export function Header() {
             </ul>
           </nav>
           <Link
-            href="/#formulario-contato"
+            href="/contato#formulario-contato"
             className="hidden min-h-12 shrink-0 items-center justify-center rounded-sm bg-gold px-5 text-sm font-semibold text-navy transition hover:bg-white focus-visible:bg-white lg:flex"
           >
-            Solicitar contato
+            Solicitar pre-agendamento
           </Link>
         </div>
-        <nav
-          id={mobileMenuId}
-          aria-label="Navegação principal mobile"
-          className={`absolute inset-x-4 top-[calc(100%-0.25rem)] overflow-hidden border border-gold/25 bg-navy shadow-[0_20px_40px_rgba(1,39,61,0.24)] transition-[max-height,opacity,transform] duration-200 md:hidden ${
-            isMobileMenuOpen
-              ? "max-h-[calc(100dvh-var(--sticky-header-height-mobile))] translate-y-0 opacity-100"
-              : "pointer-events-none max-h-0 -translate-y-1 opacity-0"
-          }`}
-        >
-          <div className="max-h-[calc(100dvh-var(--sticky-header-height-mobile))] overflow-y-auto p-2">
-            <ul className="grid gap-1 text-base font-semibold text-white/88">
-              {siteConfig.navItems.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="block min-h-12 rounded-sm px-3 py-3 transition duration-150 hover:bg-white/10 hover:text-white focus-visible:bg-white focus-visible:text-navy"
-                    onClick={closeMobileMenu}
-                    tabIndex={isMobileMenuOpen ? 0 : -1}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-              <li className="pt-1">
-                <Link
-                  href="/#formulario-contato"
-                  className="flex min-h-12 items-center justify-center rounded-sm bg-gold px-4 py-3 text-sm font-semibold text-navy transition hover:bg-white focus-visible:bg-white"
-                  onClick={closeMobileMenu}
-                  tabIndex={isMobileMenuOpen ? 0 : -1}
-                >
-                  Solicitar contato
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </nav>
+        <MobileNavigation isOpen={isMobileMenuOpen} onClose={closeMobileMenu} />
       </div>
     </header>
   );
