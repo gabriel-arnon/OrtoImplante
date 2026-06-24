@@ -1,0 +1,43 @@
+# dependencies
+node_modules/
+
+# next
+.next/
+out/
+
+# production
+build/
+dist/
+
+# testing
+test-results/
+playwright-report/
+blob-report/
+coverage/
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# environment
+.env
+.env.*
+!.env.example
+
+# vercel
+.vercel/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# editors
+.vscode/
+.idea/
+
+# system
+.DS_Store
+Thumbs.db

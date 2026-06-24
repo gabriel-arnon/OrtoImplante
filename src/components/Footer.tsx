@@ -1,0 +1,97 @@
+import { offices } from "@/content/offices";
+import { siteConfig } from "@/content/site";
+
+function mapsUrl(address: string) {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+}
+
+const footerLinkClass =
+  "underline-offset-4 transition hover:text-white hover:underline focus-visible:text-white focus-visible:underline";
+
+export function Footer() {
+  return (
+    <footer className="border-t border-light-gray bg-navy text-white">
+      <div className="section-shell grid gap-9 py-10 md:grid-cols-[1.15fr_0.9fr_1fr_0.8fr] md:items-start">
+        <div>
+          <p className="font-serif text-2xl font-semibold">{siteConfig.name}</p>
+          <p className="mt-2 text-[0.95rem] text-white/78">
+            {siteConfig.responsibleName} - {siteConfig.registration}
+          </p>
+          <p className="mt-4 max-w-xl text-[0.95rem] leading-7 text-white/72">
+            Conteudo provisorio. As informacoes finais dependem de revisao antes da publicacao.
+          </p>
+        </div>
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-gold">Contato</p>
+          <ul className="mt-4 space-y-3 text-[0.95rem] text-white/78">
+            <li>
+              <a className={footerLinkClass} href={siteConfig.whatsappHref}>
+                Canal direto: {siteConfig.phoneDisplay}
+              </a>
+            </li>
+            <li>
+              <a className={footerLinkClass} href={siteConfig.phoneHref}>
+                Telefone: {siteConfig.phoneDisplay}
+              </a>
+            </li>
+            {siteConfig.email ? (
+              <li>
+                <a className={footerLinkClass} href={`mailto:${siteConfig.email}`}>
+                  {siteConfig.email}
+                </a>
+              </li>
+            ) : null}
+            {siteConfig.instagram ? (
+              <li>
+                <a
+                  className={footerLinkClass}
+                  href={siteConfig.instagramHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {siteConfig.instagram}
+                </a>
+              </li>
+            ) : null}
+          </ul>
+        </div>
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-gold">Canais</p>
+          <ul className="mt-4 space-y-2.5 text-[0.95rem] leading-6 text-white/78">
+            {offices.map((office) => (
+              <li key={office.city}>
+                <a
+                  href={mapsUrl(office.address)}
+                  className={`font-semibold text-white ${footerLinkClass}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${office.city}: ${office.address}`}
+                  title={office.address}
+                >
+                  {office.city}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-gold">
+            Informacoes
+          </p>
+          <ul className="mt-4 space-y-3 text-[0.95rem] text-white/78">
+            <li>
+              <a href="/politica-de-privacidade" className={footerLinkClass}>
+                Politica de Privacidade
+              </a>
+            </li>
+            <li>
+              <a href="/aviso-legal" className={footerLinkClass}>
+                Aviso Legal
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  );
+}
