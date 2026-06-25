@@ -27,7 +27,7 @@ test("primary navigation reaches MVP pages", async ({ page }) => {
   await page.setViewportSize({ width: 1366, height: 768 });
   await page.goto("/");
 
-  const nav = page.getByRole("navigation", { name: "Navegacao principal" });
+  const nav = page.getByRole("navigation", { name: "Navegação principal" });
   await nav.getByRole("link", { name: "A clínica" }).click();
   await expect(page).toHaveURL("/a-clinica");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Orto & Implante");

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AppointmentCta } from "@/components/sections/AppointmentCta";
 import { FaqSection } from "@/components/sections/FaqSection";
@@ -58,36 +59,53 @@ export default async function TreatmentPage({ params }: TreatmentPageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData(treatmentFaq)) }}
       />
       <section className="section-shell py-12 md:py-16">
-        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-gold">
-          Tratamento
-        </p>
-        <h1 className="mt-3 text-4xl font-semibold text-navy">{treatment.title}</h1>
-        <p className="mt-5 max-w-3xl text-base leading-8 text-graphite-soft">
+        <nav aria-label="Breadcrumb" className="mb-7 text-sm font-semibold text-graphite-soft">
+          <ol className="flex flex-wrap items-center gap-2">
+            <li>
+              <Link href="/" className="underline-offset-4 hover:text-navy hover:underline">
+                Início
+              </Link>
+            </li>
+            <li aria-hidden="true">/</li>
+            <li>
+              <Link href="/tratamentos" className="underline-offset-4 hover:text-navy hover:underline">
+                Tratamentos
+              </Link>
+            </li>
+            <li aria-hidden="true">/</li>
+            <li className="text-navy">{treatment.title}</li>
+          </ol>
+        </nav>
+        <p className="eyebrow">Tratamento</p>
+        <h1 className="mt-3 max-w-4xl text-4xl font-semibold leading-tight text-navy md:text-5xl">
+          {treatment.title}
+        </h1>
+        <p className="section-copy mt-5 max-w-3xl">
           {treatment.description}
         </p>
       </section>
-      <section className="section-y bg-light-gray/20">
+      <section className="section-y bg-mist">
         <div className="section-shell grid gap-5 lg:grid-cols-2">
-          <article className="border border-light-gray bg-white p-5">
+          <article className="surface-card p-5 md:p-6">
             <h2 className="text-2xl font-semibold text-navy">Para que serve</h2>
-            <p className="mt-4 text-base leading-8 text-graphite-soft">{treatment.purpose}</p>
+            <p className="section-copy mt-4">{treatment.purpose}</p>
           </article>
-          <article className="border border-light-gray bg-white p-5">
+          <article className="surface-card p-5 md:p-6">
             <h2 className="text-2xl font-semibold text-navy">Possíveis indicações</h2>
             <ul className="mt-4 space-y-3 text-base leading-7 text-graphite-soft">
               {treatment.indications.map((item) => (
-                <li key={item} className="border-l-2 border-gold pl-3">
+                <li key={item} className="border-l-2 border-accent pl-3">
                   {item}
                 </li>
               ))}
             </ul>
           </article>
-          <article className="border border-light-gray bg-white p-5 lg:col-span-2">
+          <article className="surface-card p-5 md:p-6 lg:col-span-2">
             <h2 className="text-2xl font-semibold text-navy">Como funciona de forma geral</h2>
             <ol className="mt-4 grid gap-3 text-base leading-7 text-graphite-soft md:grid-cols-3">
               {treatment.howItWorks.map((item, index) => (
-                <li key={item} className="border border-light-gray bg-light-gray/20 p-4">
-                  <span className="mb-2 block text-sm font-semibold text-gold">
+                <li key={item} className="soft-card p-4">
+                  <span className="mb-2 block text-sm font-semibold text-accent">
                     Etapa {index + 1}
                   </span>
                   {item}
@@ -95,9 +113,9 @@ export default async function TreatmentPage({ params }: TreatmentPageProps) {
               ))}
             </ol>
           </article>
-          <article className="border border-gold/45 bg-gold/10 p-5 lg:col-span-2">
+          <article className="rounded-md border border-accent bg-accent-soft p-5 md:p-6 lg:col-span-2">
             <h2 className="text-2xl font-semibold text-navy">Avaliação profissional</h2>
-            <p className="mt-4 text-base leading-8 text-graphite-soft">
+            <p className="section-copy mt-4">
               {treatment.evaluationNote}
             </p>
           </article>

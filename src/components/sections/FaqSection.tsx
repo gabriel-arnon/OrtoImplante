@@ -30,13 +30,11 @@ export function FaqSection({ items = homeFaqItems }: FaqSectionProps) {
   return (
     <section className="section-y bg-white">
       <div id="faq" className="section-shell max-w-4xl">
-        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-gold">
-          Perguntas frequentes
-        </p>
-        <h2 className="mt-3 text-3xl font-semibold text-navy md:text-4xl">
+        <p className="eyebrow">Perguntas frequentes</p>
+        <h2 className="section-title mt-3">
           Dúvidas frequentes
         </h2>
-        <div className="mt-8 divide-y divide-light-gray border-y border-light-gray">
+        <div className="surface-card mt-8 divide-y divide-light-gray overflow-hidden">
           {items.map((item, index) => {
             const isOpen = openQuestions.has(index);
             const answerId = `faq-answer-${index}`;
@@ -48,13 +46,13 @@ export function FaqSection({ items = homeFaqItems }: FaqSectionProps) {
                   aria-expanded={isOpen}
                   aria-controls={answerId}
                   onClick={() => toggleQuestion(index)}
-                  className="flex min-h-16 w-full cursor-pointer items-center justify-between gap-4 rounded-sm px-3 py-5 text-left text-lg font-semibold text-navy transition hover:bg-light-gray/25 focus-visible:bg-light-gray/35"
+                  className="flex min-h-16 w-full cursor-pointer items-center justify-between gap-4 px-4 py-5 text-left text-lg font-semibold text-navy transition hover:bg-mist focus-visible:bg-mist"
                 >
                   <span>{item.question}</span>
                   <span
                     data-state={isOpen ? "open" : "closed"}
-                    className={`grid h-8 w-8 shrink-0 place-items-center rounded-full border border-gold/45 text-gold transition duration-150 ${
-                      isOpen ? "rotate-180 bg-gold/10" : ""
+                    className={`grid h-8 w-8 shrink-0 place-items-center rounded-full border border-accent text-accent transition duration-150 ${
+                      isOpen ? "rotate-180 bg-accent-soft" : ""
                     }`}
                     aria-hidden="true"
                   >
@@ -78,7 +76,7 @@ export function FaqSection({ items = homeFaqItems }: FaqSectionProps) {
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <p className="pb-5 pt-1 text-base leading-7 text-graphite-soft">
+                    <p className="px-4 pb-5 pt-1 text-[1rem] leading-8 text-graphite-soft">
                       {item.answer}
                     </p>
                   </div>

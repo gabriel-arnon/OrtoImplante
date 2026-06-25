@@ -138,27 +138,25 @@ export function AppointmentRequestForm() {
 
   const statusTone =
     submitState.type === "success"
-      ? "border-green-700/30 bg-green-50 text-green-900"
+      ? "border-success bg-success-soft text-success"
       : submitState.type === "error"
-        ? "border-gold/45 bg-gold/10 text-navy"
-        : "border-navy/15 bg-navy/5 text-navy";
+        ? "border-error bg-error-soft text-error"
+        : "border-light-gray bg-mist text-navy";
 
   return (
     <section
       aria-labelledby="formulario-contato-heading"
-      className="border border-light-gray bg-white p-4 shadow-form sm:p-5 lg:p-6"
+      className="surface-card p-4 sm:p-5 lg:p-6"
     >
       <div className="mb-4 border-b border-light-gray pb-4">
-        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-gold">
-          Pre-agendamento
-        </p>
+        <p className="eyebrow">Pré-agendamento</p>
         <h2
           id="formulario-contato-heading"
-          className="mt-2 text-2xl font-semibold text-navy md:text-3xl"
+          className="mt-2 text-2xl font-semibold leading-tight text-navy md:text-3xl"
         >
           Solicitar retorno
         </h2>
-        <p className="mt-2 text-sm leading-6 text-graphite-soft">
+        <p className="mt-2 text-[0.96rem] leading-7 text-graphite-soft">
           Envie apenas dados de contato e uma mensagem curta. O envio real permanece desativado
           nesta etapa; use WhatsApp ou telefone para contato direto.
         </p>
@@ -187,7 +185,7 @@ export function AppointmentRequestForm() {
         ))}
 
         <div>
-          <label htmlFor="fullName" className="text-[0.95rem] font-semibold text-navy">
+          <label htmlFor="fullName" className="form-label">
             Nome
           </label>
           <input
@@ -197,12 +195,12 @@ export function AppointmentRequestForm() {
             placeholder="Seu nome"
             aria-invalid={Boolean(errors.fullName)}
             aria-describedby={errors.fullName ? fieldErrorId("fullName") : undefined}
-            className="mt-1.5 min-h-12 w-full rounded-sm border border-light-gray px-3.5 text-base transition focus:border-gold disabled:bg-light-gray/40"
+            className="form-field"
             disabled={isSubmitting}
             {...register("fullName")}
           />
           {errors.fullName ? (
-            <p id={fieldErrorId("fullName")} className="mt-2 text-sm font-semibold text-red-700">
+            <p id={fieldErrorId("fullName")} className="form-error">
               {errors.fullName.message}
             </p>
           ) : null}
@@ -210,7 +208,7 @@ export function AppointmentRequestForm() {
 
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
-            <label htmlFor="phone" className="text-[0.95rem] font-semibold text-navy">
+            <label htmlFor="phone" className="form-label">
               Telefone ou WhatsApp
             </label>
             <input
@@ -220,19 +218,19 @@ export function AppointmentRequestForm() {
               placeholder="(00) 00000-0000"
               aria-invalid={Boolean(errors.phone)}
               aria-describedby={errors.phone ? fieldErrorId("phone") : undefined}
-              className="mt-1.5 min-h-12 w-full rounded-sm border border-light-gray px-3.5 text-base transition focus:border-gold disabled:bg-light-gray/40"
+              className="form-field"
               disabled={isSubmitting}
               {...register("phone")}
             />
             {errors.phone ? (
-              <p id={fieldErrorId("phone")} className="mt-2 text-sm font-semibold text-red-700">
+              <p id={fieldErrorId("phone")} className="form-error">
                 {errors.phone.message}
               </p>
             ) : null}
           </div>
 
           <div>
-            <label htmlFor="city" className="text-[0.95rem] font-semibold text-navy">
+            <label htmlFor="city" className="form-label">
               Cidade
             </label>
             <input
@@ -242,12 +240,12 @@ export function AppointmentRequestForm() {
               placeholder="Sua cidade"
               aria-invalid={Boolean(errors.city)}
               aria-describedby={errors.city ? fieldErrorId("city") : undefined}
-              className="mt-1.5 min-h-12 w-full rounded-sm border border-light-gray px-3.5 text-base transition focus:border-gold disabled:bg-light-gray/40"
+              className="form-field"
               disabled={isSubmitting}
               {...register("city")}
             />
             {errors.city ? (
-              <p id={fieldErrorId("city")} className="mt-2 text-sm font-semibold text-red-700">
+              <p id={fieldErrorId("city")} className="form-error">
                 {errors.city.message}
               </p>
             ) : null}
@@ -255,7 +253,7 @@ export function AppointmentRequestForm() {
         </div>
 
         <div>
-          <label htmlFor="treatmentInterest" className="text-[0.95rem] font-semibold text-navy">
+          <label htmlFor="treatmentInterest" className="form-label">
             Tratamento ou interesse
           </label>
           <select
@@ -264,7 +262,7 @@ export function AppointmentRequestForm() {
             aria-describedby={
               errors.treatmentInterest ? fieldErrorId("treatmentInterest") : undefined
             }
-            className="mt-1.5 min-h-12 w-full rounded-sm border border-light-gray bg-white px-3.5 text-base transition focus:border-gold disabled:bg-light-gray/40"
+            className="form-field"
             disabled={isSubmitting}
             {...register("treatmentInterest")}
           >
@@ -278,7 +276,7 @@ export function AppointmentRequestForm() {
           {errors.treatmentInterest ? (
             <p
               id={fieldErrorId("treatmentInterest")}
-              className="mt-2 text-sm font-semibold text-red-700"
+              className="form-error"
             >
               {errors.treatmentInterest.message}
             </p>
@@ -286,7 +284,7 @@ export function AppointmentRequestForm() {
         </div>
 
         <div>
-          <label htmlFor="message" className="text-[0.95rem] font-semibold text-navy">
+          <label htmlFor="message" className="form-label">
             Mensagem curta
           </label>
           <textarea
@@ -297,25 +295,25 @@ export function AppointmentRequestForm() {
             aria-describedby={
               errors.message ? `${fieldErrorId("message")} security-warning` : "security-warning"
             }
-            className="mt-1.5 w-full rounded-sm border border-light-gray px-3.5 py-2.5 text-base leading-7 transition focus:border-gold disabled:bg-light-gray/40"
+            className="form-field min-h-32 py-2.5 leading-7"
             disabled={isSubmitting}
             {...register("message")}
           />
           <p
             id="security-warning"
-            className="mt-2 border-l-2 border-gold bg-gold/10 px-3 py-2 text-sm leading-6 text-navy"
+            className="mt-2 rounded-sm border-l-2 border-warning bg-warning-soft px-3 py-2 text-[0.95rem] leading-6 text-navy"
           >
             Não envie CPF, RG, exames, documentos, senhas, dados financeiros, imagens ou
             informações clínicas sensíveis.
           </p>
           {errors.message ? (
-            <p id={fieldErrorId("message")} className="mt-2 text-sm font-semibold text-red-700">
+            <p id={fieldErrorId("message")} className="form-error">
               {errors.message.message}
             </p>
           ) : null}
         </div>
 
-        <label className="flex gap-3 border border-light-gray bg-light-gray/20 p-2.5 text-sm leading-6 text-graphite-soft">
+        <label className="flex gap-3 rounded-sm border border-light-gray bg-mist p-3 text-[0.95rem] leading-6 text-graphite-soft">
           <input
             type="checkbox"
             className="mt-1 h-4 w-4 shrink-0 accent-navy"
@@ -332,14 +330,14 @@ export function AppointmentRequestForm() {
           </span>
         </label>
         {errors.privacyAccepted ? (
-          <p id={fieldErrorId("privacyAccepted")} className="text-sm font-semibold text-red-700">
+          <p id={fieldErrorId("privacyAccepted")} className="form-error">
             {errors.privacyAccepted.message}
           </p>
         ) : null}
 
         <div
           id="form-status"
-          className={`rounded-sm border p-2.5 text-sm leading-6 ${statusTone}`}
+          className={`rounded-sm border p-2.5 text-[0.95rem] leading-6 ${statusTone}`}
           role="status"
           aria-live="polite"
         >
@@ -349,7 +347,7 @@ export function AppointmentRequestForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="min-h-12 w-full rounded-sm bg-navy px-5 font-semibold text-white transition hover:bg-navy/92 disabled:cursor-not-allowed disabled:bg-light-gray disabled:text-graphite-soft"
+          className="btn-primary w-full disabled:cursor-not-allowed disabled:bg-light-gray disabled:text-graphite-soft"
         >
           {isSubmitting ? "Enviando..." : "Solicitar pré-agendamento"}
         </button>
@@ -359,13 +357,13 @@ export function AppointmentRequestForm() {
             href={contactConfig.whatsapp.href}
             target="_blank"
             rel="noreferrer"
-            className="flex min-h-12 items-center justify-center rounded-sm bg-navy px-5 text-center font-semibold text-white transition hover:bg-navy/92"
+            className="btn-primary"
           >
             Chamar no WhatsApp
           </a>
           <a
             href={contactConfig.phone.href}
-            className="flex min-h-12 items-center justify-center rounded-sm border border-navy px-5 text-center font-semibold text-navy transition hover:bg-navy hover:text-white"
+            className="btn-secondary"
           >
             Ligar para a clínica
           </a>

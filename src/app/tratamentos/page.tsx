@@ -12,7 +12,7 @@ export const metadata: Metadata = createMetadata({
 
 export default function TreatmentsPage() {
   return (
-    <main className="bg-light-gray/20">
+    <main className="bg-mist">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -25,11 +25,11 @@ export default function TreatmentsPage() {
         }}
       />
       <section className="section-shell py-12 md:py-16">
-        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-gold">
-          Tratamentos
-        </p>
-        <h1 className="mt-3 text-4xl font-semibold text-navy">Tratamentos odontológicos</h1>
-        <p className="mt-5 max-w-3xl text-base leading-8 text-graphite-soft">
+        <p className="eyebrow">Tratamentos</p>
+        <h1 className="mt-3 max-w-4xl text-4xl font-semibold leading-tight text-navy md:text-5xl">
+          Tratamentos odontológicos
+        </h1>
+        <p className="section-copy mt-5 max-w-3xl">
           A lista abaixo reúne os tratamentos atualmente informados pela clínica. As descrições são
           educativas e cada caso exige avaliação individual para definição de conduta.
         </p>

@@ -46,7 +46,7 @@ export default function PrivacyPolicyPage() {
             Voltar para a página inicial
           </Link>
 
-          <p className="mt-8 text-sm font-semibold uppercase tracking-[0.16em] text-gold">
+          <p className="eyebrow mt-8">
             Privacidade
           </p>
           <h1 className="mt-3 text-4xl font-semibold text-navy">Política de Privacidade</h1>

@@ -25,9 +25,11 @@ export default function TeamPage() {
         }}
       />
       <section className="section-shell py-12 md:py-16">
-        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-gold">Equipe</p>
-        <h1 className="mt-3 text-4xl font-semibold text-navy">Responsável técnico</h1>
-        <p className="mt-5 max-w-3xl text-base leading-8 text-graphite-soft">
+        <p className="eyebrow">Equipe</p>
+        <h1 className="mt-3 text-4xl font-semibold leading-tight text-navy md:text-5xl">
+          Responsável técnico
+        </h1>
+        <p className="section-copy mt-5 max-w-3xl">
           Nesta etapa, a página exibe apenas o responsável técnico informado oficialmente. Demais
           profissionais serão adicionados futuramente quando nomes, registros, funções e imagens
           forem confirmados.

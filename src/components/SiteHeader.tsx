@@ -70,39 +70,33 @@ export function SiteHeader() {
   return (
     <header
       ref={headerRef}
-      className="sticky top-0 z-40 border-b border-gold/25 bg-navy text-white backdrop-blur supports-[backdrop-filter]:bg-navy/96"
+      className="sticky top-0 z-40 border-b border-light-gray bg-white/95 text-navy shadow-[0_8px_24px_rgba(7,87,107,0.06)] backdrop-blur supports-[backdrop-filter]:bg-white/88"
     >
-      <div className="section-shell relative flex min-h-20 flex-col gap-4 py-3 md:min-h-24 md:py-4 lg:min-h-28 lg:flex-row lg:items-center lg:justify-between">
-        <div className="flex items-center justify-between gap-4">
-          <BrandMark variant="dark" />
-          <button
-            type="button"
-            className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-sm border border-gold/55 text-white transition duration-150 hover:bg-white/10 focus-visible:border-white focus-visible:bg-white focus-visible:text-navy md:hidden"
-            aria-label={isMobileMenuOpen ? "Fechar menu de navegacao" : "Abrir menu de navegacao"}
-            aria-expanded={isMobileMenuOpen}
-            aria-controls={mobileMenuId}
-            onClick={() => setIsMobileMenuOpen((current) => !current)}
-          >
-            <MenuIcon isOpen={isMobileMenuOpen} />
-          </button>
-          <Link
-            href="/contato#formulario-contato"
-            className="hidden min-h-11 items-center justify-center rounded-sm border border-gold bg-gold px-4 text-sm font-semibold text-navy transition hover:bg-white hover:text-navy focus-visible:bg-white focus-visible:text-navy md:flex lg:hidden"
-          >
-            Pré-agendamento
-          </Link>
-        </div>
-        <div className="flex items-center gap-4 lg:gap-5">
+      <div className="section-shell relative flex min-h-[4.75rem] items-center justify-between gap-4 py-3">
+        <BrandMark />
+
+        <button
+          type="button"
+          className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-sm border border-light-gray bg-white text-navy transition duration-150 hover:bg-mist focus-visible:bg-mist lg:hidden"
+          aria-label={isMobileMenuOpen ? "Fechar menu de navegação" : "Abrir menu de navegação"}
+          aria-expanded={isMobileMenuOpen}
+          aria-controls={mobileMenuId}
+          onClick={() => setIsMobileMenuOpen((current) => !current)}
+        >
+          <MenuIcon isOpen={isMobileMenuOpen} />
+        </button>
+
+        <div className="hidden min-w-0 items-center gap-3 lg:flex lg:gap-5">
           <nav
-            aria-label="Navegacao principal"
-            className="-mx-1 hidden overflow-x-auto pb-1 md:block lg:mx-0 lg:overflow-visible lg:pb-0"
+            aria-label="Navegação principal"
+            className="-mx-1 overflow-x-auto pb-1 lg:mx-0 lg:overflow-visible lg:pb-0"
           >
-            <ul className="flex min-w-max gap-1 text-[0.92rem] font-semibold text-white/82 lg:justify-end lg:gap-2">
+            <ul className="flex min-w-max gap-1 text-[0.92rem] font-semibold text-graphite-soft lg:justify-end lg:gap-2">
               {siteConfig.navItems.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="block min-h-11 rounded-sm border-b-2 border-transparent px-3 py-3 transition duration-150 hover:border-gold hover:bg-white/10 hover:text-white focus-visible:border-white focus-visible:bg-white focus-visible:text-navy lg:px-3.5"
+                    className="block min-h-11 rounded-sm px-3 py-3 transition duration-150 hover:bg-mist hover:text-navy focus-visible:bg-mist lg:px-3.5"
                   >
                     {item.label}
                   </Link>
@@ -110,13 +104,11 @@ export function SiteHeader() {
               ))}
             </ul>
           </nav>
-          <Link
-            href="/contato#formulario-contato"
-            className="hidden min-h-12 shrink-0 items-center justify-center rounded-sm bg-gold px-5 text-sm font-semibold text-navy transition hover:bg-white focus-visible:bg-white lg:flex"
-          >
+          <Link href="/contato#formulario-contato" className="btn-primary hidden shrink-0 lg:inline-flex">
             Solicitar pré-agendamento
           </Link>
         </div>
+
         <MobileNavigation isOpen={isMobileMenuOpen} onClose={closeMobileMenu} />
       </div>
     </header>

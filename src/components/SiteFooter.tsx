@@ -8,22 +8,21 @@ const footerLinkClass =
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-light-gray bg-navy text-white">
-      <div className="section-shell grid gap-9 py-10 md:grid-cols-[1.1fr_0.9fr_0.8fr] md:items-start">
+    <footer className="border-t border-light-gray bg-navy-strong text-white">
+      <div className="section-shell grid gap-8 py-10 lg:grid-cols-[1.05fr_0.8fr_0.85fr_0.75fr] lg:items-start">
         <div>
           <BrandMark variant="dark" />
-          <p className="mt-4 max-w-xl text-[0.95rem] leading-7 text-white/72">
-            {siteConfig.name} - clínica odontológica em Bertioga/SP. Responsável técnico:
-            {" "}
+          <p className="mt-4 max-w-xl text-[0.96rem] leading-7 text-white/76">
+            {siteConfig.name} - clínica odontológica em Bertioga/SP. Responsável técnico:{" "}
             {siteConfig.technicalDirector.name}, {siteConfig.technicalDirector.registration}.
           </p>
-          <p className="mt-3 text-sm leading-6 text-white/68">
+          <p className="mt-3 text-[0.94rem] leading-6 text-white/68">
             {siteConfig.clinicRegistration}. {siteConfig.insuranceNotice}.
           </p>
         </div>
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-gold">Contato</p>
-          <ul className="mt-4 space-y-3 text-[0.95rem] text-white/78">
+          <p className="eyebrow text-accent-soft">Contato</p>
+          <ul className="mt-4 space-y-3 text-[0.96rem] leading-6 text-white/80">
             <li>
               <a className={footerLinkClass} href={contactConfig.whatsapp.href}>
                 {contactConfig.whatsapp.value}
@@ -43,13 +42,16 @@ export function SiteFooter() {
           </ul>
         </div>
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-gold">
-            Informacoes
-          </p>
-          <ul className="mt-4 space-y-3 text-[0.95rem] text-white/78">
+          <p className="eyebrow text-accent-soft">Horários</p>
+          <ul className="mt-4 space-y-3 text-[0.96rem] leading-6 text-white/80">
             {contactConfig.openingHoursDisplay.map((item) => (
               <li key={item}>{item}</li>
             ))}
+          </ul>
+        </div>
+        <div>
+          <p className="eyebrow text-accent-soft">Informações</p>
+          <ul className="mt-4 space-y-3 text-[0.96rem] leading-6 text-white/80">
             <li>
               <Link href="/politica-de-privacidade" className={footerLinkClass}>
                 Política de Privacidade

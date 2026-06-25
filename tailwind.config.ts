@@ -9,19 +9,35 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        navy: "#01273D",
-        gold: "#C9A459",
-        "light-gray": "#D2DCDF",
-        graphite: "#263238",
-        "graphite-soft": "#4A5960"
+        navy: "var(--color-primary)",
+        "navy-strong": "var(--color-primary-strong)",
+        gold: "var(--color-accent)",
+        accent: "var(--color-accent)",
+        "accent-soft": "var(--color-accent-soft)",
+        mist: "var(--color-surface)",
+        "light-gray": "var(--color-border)",
+        graphite: "var(--color-graphite)",
+        "graphite-soft": "var(--color-muted)",
+        success: "var(--color-success)",
+        "success-soft": "var(--color-success-soft)",
+        warning: "var(--color-warning)",
+        "warning-soft": "var(--color-warning-soft)",
+        error: "var(--color-error)",
+        "error-soft": "var(--color-error-soft)"
       },
       fontFamily: {
         sans: ["var(--font-inter)", "Arial", "Helvetica", "sans-serif"],
         serif: ["var(--font-serif)", "Georgia", "serif"]
       },
       boxShadow: {
-        soft: "0 18px 55px rgba(1, 39, 61, 0.12)",
-        form: "0 24px 70px rgba(1, 39, 61, 0.14)"
+        soft: "var(--shadow-soft)",
+        form: "var(--shadow-form)"
+      },
+      borderRadius: {
+        xs: "var(--radius-xs)",
+        sm: "var(--radius-sm)",
+        md: "var(--radius-md)",
+        lg: "var(--radius-lg)"
       }
     }
   },

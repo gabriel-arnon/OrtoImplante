@@ -4,22 +4,20 @@ import { featuredTreatments } from "@/content/treatments";
 
 export function TreatmentsPreview() {
   return (
-    <section className="section-y bg-light-gray/30">
+    <section className="section-y bg-mist">
       <div className="section-shell">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-gold">
-              Tratamentos
-            </p>
-            <h2 className="mt-3 text-3xl font-semibold text-navy md:text-4xl">
+            <p className="eyebrow">Tratamentos</p>
+            <h2 className="section-title mt-3">
               Principais tratamentos
             </h2>
-            <p className="mt-4 text-base leading-7 text-graphite-soft">
+            <p className="section-copy mt-4">
               Conheça áreas de atendimento informadas pela clínica. A indicação depende de
               avaliação individual.
             </p>
           </div>
-          <Link href="/tratamentos" className="font-semibold text-navy underline-offset-4 hover:underline">
+          <Link href="/tratamentos" className="btn-quiet">
             Ver todos
           </Link>
         </div>
