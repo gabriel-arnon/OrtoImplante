@@ -1,42 +1,50 @@
+import Image from "next/image";
 import Link from "next/link";
-import { ProfessionalCard } from "@/components/sections/ProfessionalCard";
 import { professionals } from "@/content/professionals";
 
 export function TeamPreview() {
-  if (!professionals.length) {
+  const professional = professionals[0];
+
+  if (!professional) {
     return null;
   }
 
   return (
     <section className="section-y bg-white">
       <div className="section-shell">
-        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-center">
           <div>
             <p className="eyebrow">Equipe</p>
-            <h2 className="section-title mt-3">
-              Responsável técnico
-            </h2>
-          </div>
-          <Link href="/equipe" className="btn-quiet">
-            Ver equipe
-          </Link>
-        </div>
-        <div className="mt-8 grid gap-5 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.25fr)] lg:items-stretch">
-          <div className="soft-card flex flex-col justify-between p-5 md:p-6">
-            <div>
-              <p className="text-lg font-semibold text-navy">Equipe em atualização</p>
-              <p className="mt-3 text-[0.98rem] leading-7 text-graphite-soft">
-                Nesta etapa, exibimos somente o responsável técnico confirmado. Novos profissionais
-                serão incluídos quando dados e imagens forem fornecidos.
-              </p>
-            </div>
-            <p className="mt-6 rounded-sm bg-white p-3 text-[0.95rem] font-semibold text-navy">
-              Espaço preparado para fotos futuras da equipe.
+            <h2 className="section-title mt-3">Dr. Alexandre Molter</h2>
+            <p className="mt-3 text-base font-semibold text-accent">
+              {professional.role} · {professional.registration}
             </p>
+            <p className="section-copy mt-5">{professional.bio}</p>
+            <p className="section-copy mt-4">
+              A identificação do responsável técnico ajuda a orientar a avaliação individual, o
+              planejamento dos tratamentos e a continuidade do cuidado dentro da Orto & Implante.
+            </p>
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+              <Link href="/equipe" className="btn-primary">
+                Ver equipe
+              </Link>
+              <Link href="/contato#formulario-contato" className="btn-secondary">
+                Solicitar pré-agendamento
+              </Link>
+            </div>
           </div>
-          {professionals.map((professional) => (
-            <ProfessionalCard key={professional.name} professional={professional} />
-          ))}
+          <div className="surface-card overflow-hidden bg-white p-3">
+            {professional.image ? (
+              <Image
+                src={professional.image.src}
+                alt={professional.image.alt}
+                width={professional.image.width}
+                height={professional.image.height}
+                sizes="(max-width: 1023px) min(100vw - 2rem, 560px), 430px"
+                className="aspect-[4/5] w-full rounded-sm object-cover object-[58%_24%]"
+              />
+            ) : null}
+          </div>
         </div>
       </div>
     </section>

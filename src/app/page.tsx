@@ -5,6 +5,7 @@ import { FaqSection } from "@/components/sections/FaqSection";
 import { Hero } from "@/components/sections/Hero";
 import { LocationSection } from "@/components/sections/LocationSection";
 import { TeamPreview } from "@/components/sections/TeamPreview";
+import { TechnicalDirectorStrip } from "@/components/sections/TechnicalDirectorStrip";
 import { TechnologySection } from "@/components/sections/TechnologySection";
 import { TreatmentsPreview } from "@/components/sections/TreatmentsPreview";
 import {
@@ -30,6 +31,7 @@ export default function Home() {
         />
       ))}
       <Hero />
+      <TechnicalDirectorStrip />
       <Differentials />
       <TreatmentsPreview />
       <ClinicIntro />

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { brandAssets } from "@/content/assets";
 import { siteConfig } from "@/content/site";
 import { absoluteUrl, isIndexingEnabled } from "@/lib/utils";
 
@@ -15,14 +16,15 @@ export function createMetadata({
 }: MetadataOptions = {}): Metadata {
   const pageTitle = title ? `${title} | ${siteConfig.name}` : siteConfig.name;
   const url = absoluteUrl(path);
-  const socialImagePath = "/favicon.svg";
+  const socialImage = brandAssets.logo;
+  const socialImagePath = socialImage.src;
   const socialImageUrl = absoluteUrl(socialImagePath) || socialImagePath;
   const indexingEnabled = isIndexingEnabled();
-  const socialImage = {
+  const socialImageMetadata = {
     url: socialImageUrl,
-    width: 1200,
-    height: 630,
-    alt: `${siteConfig.name} - marca`
+    width: socialImage.width,
+    height: socialImage.height,
+    alt: socialImage.alt
   };
   const openGraph = {
     title: pageTitle,
@@ -30,7 +32,7 @@ export function createMetadata({
     siteName: siteConfig.name,
     locale: "pt_BR",
     type: "website" as const,
-    images: [socialImage],
+    images: [socialImageMetadata],
     ...(url ? { url } : {})
   };
 

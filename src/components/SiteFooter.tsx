@@ -38,13 +38,13 @@ export function SiteFooter() {
                 {contactConfig.email.value}
               </a>
             </li>
-            <li>{contactConfig.address.display}</li>
+            <li>{contactConfig.location.display}</li>
           </ul>
         </div>
         <div>
           <p className="eyebrow text-accent-soft">Horários</p>
           <ul className="mt-4 space-y-3 text-[0.96rem] leading-6 text-white/80">
-            {contactConfig.openingHoursDisplay.map((item) => (
+            {contactConfig.location.openingHoursDisplay.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>

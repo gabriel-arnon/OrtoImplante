@@ -15,36 +15,66 @@ function compact<T extends Record<string, unknown>>(value: T) {
   );
 }
 
+function postalAddressStructuredData() {
+  const location = contactConfig.location;
+
+  if (!location.isConfirmed) {
+    return undefined;
+  }
+
+  return compact({
+    "@type": "PostalAddress",
+    streetAddress: `${location.street}, ${location.complement}`,
+    addressLocality: location.city,
+    addressRegion: location.state,
+    postalCode: location.postalCode,
+    addressCountry: location.country
+  });
+}
+
+function geoStructuredData() {
+  const { latitude, longitude } = contactConfig.location;
+
+  return {
+    "@type": "GeoCoordinates",
+    latitude,
+    longitude
+  };
+}
+
+function openingHoursSpecificationStructuredData() {
+  return contactConfig.location.openingHoursSpecification.map((item) => ({
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: item.dayOfWeek,
+    opens: item.opens,
+    closes: item.closes
+  }));
+}
+
 export function dentistStructuredData() {
   const url = absoluteUrl("/");
+  const location = contactConfig.location;
 
   return compact({
     "@context": "https://schema.org",
     "@type": "Dentist",
     name: siteConfig.name,
     url,
-    areaServed: `${siteConfig.city}/${siteConfig.state}`,
+    areaServed: `${location.city}/${location.state}`,
     telephone: contactConfig.phone.isConfirmed ? contactConfig.phone.value : undefined,
     email: contactConfig.email.isConfirmed ? contactConfig.email.value : undefined,
-    founder: siteConfig.technicalDirector.name,
-    foundingDate: String(siteConfig.foundedYear),
     identifier: [siteConfig.clinicRegistration, siteConfig.technicalDirector.registration],
-    medicalSpecialty: "Dentistry",
-    address: contactConfig.address.isConfirmed
-      ? compact({
-          "@type": "PostalAddress",
-          streetAddress: contactConfig.address.street,
-          addressLocality: contactConfig.address.city,
-          addressRegion: contactConfig.address.state,
-          postalCode: contactConfig.address.postalCode,
-          addressCountry: contactConfig.address.country
-        })
-      : undefined
+    hasMap: location.mapsUrl,
+    address: postalAddressStructuredData(),
+    geo: geoStructuredData(),
+    openingHoursSpecification: openingHoursSpecificationStructuredData()
   });
 }
 
 export function localBusinessStructuredData() {
-  if (!contactConfig.address.isConfirmed && !contactConfig.phone.isConfirmed) {
+  const location = contactConfig.location;
+
+  if (!location.isConfirmed && !contactConfig.phone.isConfirmed) {
     return null;
   }
 
@@ -57,30 +87,12 @@ export function localBusinessStructuredData() {
     url,
     telephone: contactConfig.phone.isConfirmed ? contactConfig.phone.value : undefined,
     email: contactConfig.email.isConfirmed ? contactConfig.email.value : undefined,
-    founder: siteConfig.technicalDirector.name,
-    foundingDate: String(siteConfig.foundedYear),
     identifier: [siteConfig.clinicRegistration, siteConfig.technicalDirector.registration],
-    medicalSpecialty: "Dentistry",
-    paymentAccepted: "Atendimento particular",
-    address: contactConfig.address.isConfirmed
-      ? compact({
-          "@type": "PostalAddress",
-          streetAddress: contactConfig.address.street,
-          addressLocality: contactConfig.address.city,
-          addressRegion: contactConfig.address.state,
-          postalCode: contactConfig.address.postalCode,
-          addressCountry: contactConfig.address.country
-        })
-      : undefined,
-    geo:
-      contactConfig.address.latitude && contactConfig.address.longitude
-        ? {
-            "@type": "GeoCoordinates",
-            latitude: contactConfig.address.latitude,
-            longitude: contactConfig.address.longitude
-          }
-        : undefined,
-    openingHours: contactConfig.openingHours
+    areaServed: `${location.city}/${location.state}`,
+    hasMap: location.mapsUrl,
+    address: postalAddressStructuredData(),
+    geo: geoStructuredData(),
+    openingHoursSpecification: openingHoursSpecificationStructuredData()
   });
 }
 

@@ -11,6 +11,8 @@ export const metadata: Metadata = createMetadata({
 });
 
 export default function ContactPage() {
+  const location = contactConfig.location;
+
   return (
     <main className="bg-mist">
       <script
@@ -53,12 +55,23 @@ export default function ContactPage() {
             </div>
             <div className="p-5">
               <dt className="font-semibold text-navy">Endereço</dt>
-              <dd className="mt-2 text-[1rem] leading-7 text-graphite-soft">{contactConfig.address.display}</dd>
+              <dd className="mt-2 text-[1rem] leading-7 text-graphite-soft">
+                <span className="block">{location.display}</span>
+                <a
+                  href={location.mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Abrir localização da Orto & Implante no Google Maps"
+                  className="mt-3 inline-flex font-semibold text-navy underline-offset-4 hover:underline"
+                >
+                  Abrir no Google Maps
+                </a>
+              </dd>
             </div>
             <div className="p-5">
               <dt className="font-semibold text-navy">Atendimento</dt>
               <dd className="mt-2 space-y-1 text-[1rem] leading-7 text-graphite-soft">
-                {contactConfig.openingHoursDisplay.map((item) => (
+                {location.openingHoursDisplay.map((item) => (
                   <span key={item} className="block">
                     {item}
                   </span>

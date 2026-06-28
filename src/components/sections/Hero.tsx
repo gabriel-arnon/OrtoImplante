@@ -1,9 +1,13 @@
+import Image from "next/image";
 import Link from "next/link";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { clinicAssets } from "@/content/assets";
 import { contactConfig } from "@/content/contact";
 import { siteConfig } from "@/content/site";
 
 export function Hero() {
+  const facade = clinicAssets.facade;
+
   return (
     <section className="overflow-hidden border-b border-light-gray bg-gradient-to-b from-white to-mist">
       <div className="section-shell grid gap-10 py-12 md:py-16 lg:grid-cols-[minmax(0,1.28fr)_minmax(19rem,0.72fr)] lg:items-center xl:py-20">
@@ -41,15 +45,13 @@ export function Hero() {
           </div>
         </div>
         <div className="surface-card relative min-h-[24rem] overflow-hidden bg-white p-4 md:p-5">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_26%_24%,rgba(119,200,189,0.2),transparent_35%),linear-gradient(135deg,rgba(226,242,241,0.95),rgba(255,255,255,0.86))]" />
-          <div className="absolute right-4 top-10 h-36 w-36 rounded-full border border-accent-soft" aria-hidden="true" />
-          <div className="absolute bottom-14 left-8 h-24 w-24 rounded-full bg-white/55" aria-hidden="true" />
+          <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(226,242,241,0.95),rgba(255,255,255,0.86))]" />
           <div
-            className="relative flex h-full min-h-[21rem] flex-col justify-between rounded-md border border-white/80 bg-white/66 p-5"
-            aria-label="Área visual reservada para imagem da clínica"
+            className="relative flex h-full min-h-[21rem] flex-col justify-between gap-5 rounded-md border border-white/80 bg-white/72 p-5"
+            aria-label="Informações e fachada da clínica"
           >
             <div className="max-w-sm">
-              <p className="eyebrow">{contactConfig.address.city}/SP</p>
+              <p className="eyebrow">{contactConfig.location.city}/SP</p>
               <p className="mt-4 text-2xl font-semibold leading-tight text-navy md:text-[2rem]">
                 Cuidado odontológico em ambiente planejado
               </p>
@@ -57,9 +59,21 @@ export function Hero() {
                 Estrutura em Bertioga com atendimento particular e avaliação individual.
               </p>
             </div>
+            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-md border border-light-gray bg-white shadow-soft">
+              <Image
+                src={facade.src}
+                alt={facade.alt}
+                width={facade.width}
+                height={facade.height}
+                sizes="(max-width: 1023px) calc(100vw - 2rem), 360px"
+                priority
+                className="h-full w-full object-cover"
+                style={{ objectPosition: facade.objectPosition }}
+              />
+            </div>
             <div className="grid gap-3 text-[0.95rem] leading-6 text-graphite-soft">
               <p className="rounded-sm bg-white/85 p-3 font-semibold text-navy">
-                {contactConfig.address.display}
+                {contactConfig.location.display}
               </p>
               <p className="rounded-sm bg-white/85 p-3">
                 Segunda a sexta, 09h às 19h. Sábado, 09h às 13h.

@@ -5,6 +5,49 @@ export type ContactChannel = {
   isConfirmed: boolean;
 };
 
+export const clinicLocation = {
+  street: "Avenida Anchieta, 1346",
+  complement: "salas 11/12",
+  district: "",
+  city: "Bertioga",
+  state: "SP",
+  stateName: "São Paulo",
+  postalCode: "",
+  country: "BR",
+  countryName: "Brazil",
+  display: "Avenida Anchieta, 1346, salas 11/12, Bertioga/SP",
+  mapsUrl:
+    "https://www.google.com/maps/place/Orto+e+Implante+Bertioga+-+Cl%C3%ADnica+Odontol%C3%B3gica+Implantes+Dent%C3%A1rios/@-23.8434663,-46.1350962,17z/data=!4m10!1m2!2m1!1sAv.+Anchieta,+1346,+salas+11%2F12,+Bertioga%2FSP!3m6!1s0x94cdf3f622debb35:0x7f6b10344a7e89a5!8m2!3d-23.8434663!4d-46.1350962!15sCixBdi4gQW5jaGlldGEsIDEzNDYsIHNhbGFzIDExLzEyLCBCZXJ0aW9nYS9TUA!16s%2Fg%2F11fsrxz3hk",
+  latitude: -23.8434663,
+  longitude: -46.1350962,
+  parkingInfo: "Fácil estacionamento informado pela clínica",
+  accessibilityInfo: "Acessibilidade informada pela clínica",
+  openingHours: ["Mo-Fr 09:00-12:00", "Mo-Fr 14:00-19:00", "Sa 09:00-13:00"],
+  openingHoursDisplay: [
+    "Segunda a sexta: 09h às 19h",
+    "Intervalo: 12h às 14h",
+    "Sábado: 09h às 13h"
+  ],
+  openingHoursSpecification: [
+    {
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "09:00",
+      closes: "12:00"
+    },
+    {
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "14:00",
+      closes: "19:00"
+    },
+    {
+      dayOfWeek: "Saturday",
+      opens: "09:00",
+      closes: "13:00"
+    }
+  ],
+  isConfirmed: true
+} as const;
+
 export const contactConfig = {
   phone: {
     label: "Telefone",
@@ -24,25 +67,7 @@ export const contactConfig = {
     value: "orto.implante@outlook.com",
     isConfirmed: true
   } satisfies ContactChannel,
-  address: {
-    street: "Av. Anchieta, 1346, salas 11/12",
-    district: "",
-    city: "Bertioga",
-    state: "SP",
-    postalCode: "",
-    country: "BR",
-    display: "Av. Anchieta, 1346, salas 11/12, Bertioga/SP",
-    mapsUrl: "",
-    latitude: null,
-    longitude: null,
-    isConfirmed: true
-  },
-  openingHours: ["Mo-Fr 09:00-12:00", "Mo-Fr 14:00-19:00", "Sa 09:00-13:00"],
-  openingHoursDisplay: [
-    "Segunda a sexta: 09h às 19h",
-    "Intervalo: 12h às 14h",
-    "Sábado: 09h às 13h"
-  ],
+  location: clinicLocation,
   whatsappInitialMessage:
     "Olá, gostaria de informações sobre atendimento na Orto & Implante."
 } as const;
