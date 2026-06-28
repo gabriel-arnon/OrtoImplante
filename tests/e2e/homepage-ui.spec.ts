@@ -20,9 +20,14 @@ test("mobile navigation opens, closes and links to contact", async ({ page }) =>
 });
 
 test("key responsive widths avoid horizontal overflow", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 900 });
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+
+  const menuButton = page.getByRole("button", { name: "Abrir menu de navegação" });
+  const desktopNavigation = page.getByRole("navigation", { name: "Navegação principal", exact: true });
+
   for (const width of [320, 375, 768, 1024, 1440]) {
     await page.setViewportSize({ width, height: 900 });
-    await page.goto("/");
 
     const logoBox = await page
       .getByRole("img", { name: "Logotipo da Orto & Implante" })
@@ -39,15 +44,25 @@ test("key responsive widths avoid horizontal overflow", async ({ page }) => {
     expect(facadeBox?.width, `facade width at ${width}px`).toBeGreaterThan(180);
     expect(facadeBox?.height, `facade height at ${width}px`).toBeGreaterThan(110);
 
-    const metrics = await page.evaluate(() => ({
-      body: document.body.scrollWidth,
-      document: document.documentElement.scrollWidth,
-      viewport: window.innerWidth
-    }));
+    if (width < 1024) {
+      await expect(menuButton, `hamburger at ${width}px`).toBeVisible();
+      await expect(desktopNavigation, `desktop navigation at ${width}px`).toBeHidden();
+    } else {
+      await expect(menuButton, `hamburger at ${width}px`).toBeHidden();
+      await expect(desktopNavigation, `desktop navigation at ${width}px`).toBeVisible();
+    }
 
-    expect(Math.max(metrics.body, metrics.document), `viewport ${width}px`).toBeLessThanOrEqual(
-      metrics.viewport + 1
-    );
+    const metrics = await page.evaluate(() => {
+      const header = document.querySelector("header");
+
+      return {
+        pageFitsViewport: document.documentElement.scrollWidth <= window.innerWidth,
+        headerFitsViewport: (header?.scrollWidth ?? 0) <= window.innerWidth
+      };
+    });
+
+    expect(metrics.pageFitsViewport, `page overflow at ${width}px`).toBe(true);
+    expect(metrics.headerFitsViewport, `header overflow at ${width}px`).toBe(true);
   }
 });
 
