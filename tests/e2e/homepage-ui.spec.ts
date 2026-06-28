@@ -40,7 +40,7 @@ test("key responsive widths avoid horizontal overflow", async ({ page }) => {
 
     expect(logoBox?.width, `logo width at ${width}px`).toBeGreaterThanOrEqual(150);
     expect(logoBox?.width, `logo width at ${width}px`).toBeLessThanOrEqual(205);
-    expect(logoBox?.height, `logo height at ${width}px`).toBeLessThanOrEqual(56);
+    expect(logoBox?.height, `logo height at ${width}px`).toBeLessThanOrEqual(64);
     expect(facadeBox?.width, `facade width at ${width}px`).toBeGreaterThan(180);
     expect(facadeBox?.height, `facade height at ${width}px`).toBeGreaterThan(110);
 
@@ -77,6 +77,16 @@ test("approved brand and clinic images render without broken sources", async ({ 
     (element) => element.parentElement?.className ?? ""
   );
   expect(headerLogoContainerClass).not.toContain("bg-white");
+
+  const footerLogo = page
+    .locator("footer")
+    .getByRole("img", { name: "Logotipo da Orto & Implante" });
+  await expect(footerLogo).toHaveAttribute("src", /logo-footer-transparent\.png/);
+  const footerLogoContainerClass = await footerLogo.evaluate(
+    (element) => element.parentElement?.className ?? ""
+  );
+  expect(footerLogoContainerClass).not.toContain("bg-white");
+
   await expect(page.getByRole("img", { name: "Fachada da Orto & Implante em Bertioga" }).first()).toBeVisible();
   await expect(page.getByRole("img", { name: "Recepção da Orto & Implante" }).first()).toBeVisible();
 

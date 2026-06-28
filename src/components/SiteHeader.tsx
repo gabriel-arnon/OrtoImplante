@@ -72,7 +72,7 @@ export function SiteHeader() {
       ref={headerRef}
       className="sticky top-0 z-40 border-b border-light-gray bg-white/95 text-navy shadow-[0_8px_24px_rgba(7,87,107,0.06)] backdrop-blur supports-[backdrop-filter]:bg-white/88"
     >
-      <div className="section-shell relative flex min-h-[4.75rem] items-center justify-between gap-4 py-3">
+      <div className="section-shell relative flex min-h-[4.75rem] items-center justify-between gap-4 py-1.5">
         <BrandMark />
 
         <button

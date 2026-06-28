@@ -9,7 +9,7 @@ type BrandMarkProps = {
 
 export function BrandMark({ variant = "light" }: BrandMarkProps) {
   const isDark = variant === "dark";
-  const logo = brandAssets.logo;
+  const logo = isDark ? brandAssets.footerLogo : brandAssets.logo;
 
   return (
     <Link
@@ -18,9 +18,9 @@ export function BrandMark({ variant = "light" }: BrandMarkProps) {
       aria-label={`${siteConfig.name} - página inicial`}
     >
       <span
-        className={`relative block h-[3.15rem] w-[10rem] shrink-0 overflow-hidden rounded-sm ${
-          isDark ? "bg-white/95 shadow-[0_8px_22px_rgba(0,0,0,0.18)]" : ""
-        } sm:w-[11.5rem] lg:w-[12.5rem]`}
+        className={`relative block h-14 w-[10rem] shrink-0 overflow-hidden ${
+          isDark ? "drop-shadow-[0_1px_1px_rgba(255,255,255,0.2)]" : ""
+        } sm:h-16 sm:w-[11.5rem] lg:w-[12.5rem]`}
       >
         <Image
           src={logo.src}

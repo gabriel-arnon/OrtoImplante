@@ -13,16 +13,22 @@ export const brandAssets = {
     width: 512,
     height: 287,
     alt: "Logotipo da Orto & Implante"
+  },
+  footerLogo: {
+    src: "/images/brand/logo-footer-transparent.png",
+    width: 1673,
+    height: 940,
+    alt: "Logotipo da Orto & Implante"
   }
 } as const satisfies Record<string, SiteImageAsset>;
 
 export const clinicAssets = {
   facade: {
-    src: "/images/clinic/WhatsApp-Image-2024-03-19-at-10.05.19-qlgebx8b5jua30nd19zsr95ff7mnbjw37p6bxu22tg.jpeg",
+    src: "/images/clinic/facade-atualizada.png",
     width: 1672,
     height: 941,
     alt: "Fachada da Orto & Implante em Bertioga",
-    objectPosition: "50% 48%",
+    objectPosition: "50% 50%",
     role: "facade-location"
   },
   reception: {
